@@ -1,16 +1,19 @@
 # Requirement Specification
 
-## I. Current Situation (tan)
+## I. Current Situation
 // sports broadcaster need software to plot multiple videos :)
 
-## II. Dream System(tan)
+## II. Dream System
 // software work yes
 
-## III. Current Processes(adi)
+## III. Current Processes
 // manual multi-videos
 
+## IV. Required Processes
+// generally describe the application here :)
 
-## V. Required features (Khizr)
+
+## V. System features
 // supports images
 // selecting work region
 // layout / plotting : video region assignment
@@ -18,11 +21,11 @@
 // scrubbing : relocate video position on timeline
 
 
-## VI. System Direction / Guidelines (adi)
+## VI. System Direction / Guidelines
 // quality focus
 // less dynamic
 
-## VII. Requirement List(Khizr)
+## VII. Requirement List
 
 ### Deployment requirements
 // win / linux desktop app
