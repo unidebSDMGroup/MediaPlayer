@@ -1,7 +1,8 @@
 # Functional Specifications
 
 ## I . Overview(selin)
-// general description of the expected project ( not too technical)
+
+The main thing that is aimed with the software is to join multiple videos and play them simultaneously by using a timeline and layout. It will also be possible to place pictures within videos. With basic tools, the user will be able to create original designs by editing the videos and images. Videos can be trimmed, rotated while images can be filtered and adjusted. The final version of combined videos and pictures can be turned into different file formats.
 
 ## II . Product Perspective(Khizr)
 A per the costumers requirements the software is a video creator that has the ability the stitch and synchronize multiple video files. It also should allow for a certain amount of audio editing and give the user the choice of which format they would like to export the new video file as.
