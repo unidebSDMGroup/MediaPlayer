@@ -23,7 +23,8 @@ A simple example would be 'Windows Movie Maker'.
 
 
 ## VII . version control Requirements(selin)
-// git
+
+The version control system enables all team members to work together on the same project. Since every change done by team members is stored in the database, team members can cooperate without any confusion. It is also necessary to check each team member's contribution to the project. For this project Git is being used as version control, so everyone can access the latest version.
 
 ## VIII. Testing Requirements(nehal)
 // this proccess requires testing because :
