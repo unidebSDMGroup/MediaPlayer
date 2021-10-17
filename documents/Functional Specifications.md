@@ -25,7 +25,20 @@ The Interface will mainly consist of two screens, one will show a preview of the
 - ( Optionally ) A support for audio files. Audio features also apply.
 
 ## IV . Screen Plans
+The general look of the software is still in deliberation. but as stated before, we have decided to use two windows for plotting / synching and one window for the final render.
 
+Below is a quick screen plan of the timeline, it contains imported media as layers with different color codes as well as a picture identifier. The timeline also allows you to import media, see media details and render the result.
+
+![back](/resources/images/timeline.png)
+
+The timeline is also accompanied with a preview to visualize your plot. you're able to manually transform ( for now limited to translating and resizing ) videos and pictures.
+Transform constraints will be discussed later on in system design.
+
+![back](/resources/images/prev.png)
+
+Once rendered, this window will appear. This window will act as a video player for all your imported media with your chosen plot.
+
+![back](/resources/images/render.png)
 ## V. Software Requirements
 
 ### Java :

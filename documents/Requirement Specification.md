@@ -14,7 +14,7 @@ The main goal of this software is that it allows the user to make there own movi
 
 ## V. Required features (Khizr)
 
-- The video creator/editor it must be able to stitch not just videos together into one video but allow for placement   of images into the mix of videos. 
+- The video creator/editor it must be able to stitch not just videos together into one video but allow for placement   of images into the mix of videos.
 
 - There must be a region in the software which contains the editing features underneath the viewport, the viewport    will have a feature allowing the user to arrange the videos/images in the layout they would like.
 
@@ -31,7 +31,7 @@ The main goal of this software is that it allows the user to make there own movi
 ### Deployment requirements
 - The video creator is expected to be deployed on a Windows PC.
 - Since it is a simple editing software it will only require basic hardware to run.
-- The software can be ported to linux to allow for more users. 
+- The software can be ported to linux to allow for more users.
 
 ###  Functional requirements
 
@@ -42,7 +42,7 @@ The main goal of this software is that it allows the user to make there own movi
 - Work space with the video files shown as tracks for easy editing.
 
 #### Build
- 
+
 - Software must be an executable file.
 
 #### Exporting
@@ -54,4 +54,6 @@ The main goal of this software is that it allows the user to make there own movi
 - Software should be able to import video files of multiple different formats easily.
 
 ## VII. Dictionary
-// words
+Seek : Play the current video or audio for the specified time position.
+Plot : Segment, divide.
+Media : Images, Audio and Video.
