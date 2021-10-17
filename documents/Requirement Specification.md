@@ -1,7 +1,8 @@
 # Requirement Specification
 
-## I. Current Situation (tan)
-// sports broadcaster need software to plot multiple videos :)
+## I. Current Situation
+
+Thanks to the development of technology over the past decade, video editing has become easier and more powerful than ever before. Evidence of this appears all around us in our daily lives. Not to be confused with a video host or live streaming solution, multi-video editing software is another essential program for synching two different videos. multi-video editing software performs several tasks related to video alteration.
 
 ## II. Dream System(tan)
 // software work yes
