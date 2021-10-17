@@ -4,8 +4,9 @@
 
 Thanks to the development of technology over the past decade, video editing has become easier and more powerful than ever before. Evidence of this appears all around us in our daily lives. Not to be confused with a video host or live streaming solution, multi-video editing software is another essential program for synching two different videos. multi-video editing software performs several tasks related to video alteration. The software allows you to mix multiple video sources to create a professional-looking HD movie. Encoding is another major function of this software .The beauty of most multi-video editing software is that they help you produce those professional-grade movies without much experience.
 
-## II. Dream System(tan)
-// software work yes
+## II. Dream System
+
+The main goal of this software is that it allows the user to make there own movies with the help of joining multiple videos together. You can import all of those videos from your library and paste them together. you can also use different formats of video as it supports it and offers an intuitive interface.
 
 ## III. Current Processes(adi)
 // manual multi-videos
