@@ -6,7 +6,7 @@ Thanks to the development of technology over the past decade, video editing has 
 
 ## II. Dream System
 
-The main goal of this software is that it allows the user to make there own movies with the help of joining multiple videos together. You can import all of those videos from your library and paste them together. you can also use different formats of video as it supports it and offers an intuitive interface.
+The main goal of this software is that it allows the user to make there own movies with the help of joining multiple videos together. You can import all of those videos from your library and paste them together. you can also use different formats of video as it supports it and offers an intuitive interface. Key features of this product are the ability to edit and even provide music if you want. You can be your own movie producer. It provides all items needed for that, such as muting/synching or removing undesirable parts. There is also a preview option you can check in real time every change made on the video. With this software, videos can be cropped and even divided into several parts and segments.
 
 ## III. Current Processes(adi)
 // manual multi-videos
