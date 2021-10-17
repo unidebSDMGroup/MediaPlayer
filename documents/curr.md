@@ -1,9 +1,12 @@
 # Requirement Specification
 
 ## I. Current Situation
-// sports broadcaster need software to plot multiple videos :)
+
+Thanks to the development of technology over the past decade, video editing has become easier and more powerful than ever before. Evidence of this appears all around us in our daily lives.
 
 ## II. Dream System
+
+
 // software work yes
 
 ## III. Current Processes
