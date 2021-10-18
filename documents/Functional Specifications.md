@@ -51,6 +51,13 @@ JUnit was chosen as the main testing framework due to it's familiarity and impor
 To make aquireing frameworks, project building and reporting easier, we will be using Maven.
 
 ## VI. Risk Analysis (nehal)
+- System doesn't perform as per the functional requirements specified by the client.
+- Assumes the system requirements are correct and complete, when they are not.
+- The Interface doesn't work properly which results the communication between programs and/or systems are broken down.
+- The Interface is unusable by the users 
+- The data to be modified can be corrupted.
+- The resources used by the software to render/edit the videos might be too overwhelming for lower caliber hardwares.
+- Testing if not done properly may lead to failure in obtaining the requirements.
 
 
 ## VII . version control Requirements(selin)
