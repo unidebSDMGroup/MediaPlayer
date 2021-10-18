@@ -65,4 +65,7 @@ To make aquireing frameworks, project building and reporting easier, we will be 
 The version control system enables all team members to work together on the same project. Since every change done by team members is stored in the database, team members can cooperate without any confusion. It is also necessary to check each team member's contribution to the project. For this project Git is being used as version control, so everyone can access the latest version.
 
 ## VIII. Testing Requirements(nehal)
-// this proccess requires testing because :
+- Testing is required to make sure all aspects of the program perform as per the functional requirements specified by the client.
+- Testing is requred to make sure the data used doesn't get corrupted.
+- After the initial testing phase is complete, since the software is to be used by small number of users, they would need additional support for beta testing the software in case of bugs/irregularities and make required changes specified by the client.
+- Further planning on maintainance is required in order to discuss the testing strategy.
