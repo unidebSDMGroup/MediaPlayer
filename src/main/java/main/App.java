@@ -7,32 +7,36 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class App extends Application{
 	 	
 	
 	    
 	  public void start(Stage primaryStage) {
-		  
+
 		    Group group = new Group();
 
+
 		  Stage previewStage = new Stage();
+	        previewStage.initStyle(StageStyle.UNDECORATED);
+
 
 		  try {
-			  FXMLLoader loader = new FXMLLoader(); // FXML for primary stage
-			  Parent root = loader.load(getClass().getResource("/scenes/Editor_Screen.fxml"));
+			  Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Editor_Screen.fxml"));
 			  Scene scene = new Scene(root);
 			  primaryStage.setScene(scene);
 			  primaryStage.show();
-			  primaryStage.setTitle("Editor");
-			  primaryStage.setX(50);
+			  primaryStage.setTitle("Timeline");
+			  primaryStage.setY(550);
 
-			  FXMLLoader anotherLoader = new FXMLLoader() ; // FXML for second stage
-			  Parent anotherRoot = anotherLoader.load(getClass().getResource("/scenes/Preview_Screen.fxml"));
+
+			  Parent anotherRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Preview_Screen.fxml"));
 			  Scene anotherScene = new Scene(anotherRoot);
 			  previewStage.setScene(anotherScene);
 			  previewStage.show();
 			  previewStage.setTitle("Preview");
+			  previewStage.setY(100);
 
 		  } catch (Exception exc) {
 
