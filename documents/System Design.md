@@ -30,6 +30,9 @@ This Project will use Business-to-consumer model. The finished product will be d
 ## V . Functional Design
 
 ## VI . Use Case
+There will be two screens for the user: Timeline Screen / Preview Screen. The user can easily upload and use media files via file import. Timeline screen will be used for editing images and videos allowing the user to set the start-end points of each video and mute/unmute them while the preview screen will be used for plotting videos, images, and resizing them. For the user’s sake, with the help of export, the final version of the all simultaneously playing videos will be displayed in a new window called the render screen. They can be played and paused on this screen.
+
+![back](/resources/images/UseCaseDiagram.jpg)
 
 ## VII . plan schedule
 
