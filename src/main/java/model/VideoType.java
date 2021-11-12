@@ -2,9 +2,11 @@ package model;
 
 import com.sun.media.jfxmedia.MediaPlayer;
 
+import javafx.scene.media.MediaView;
+
 public class VideoType extends VisualType {
 
-	MediaPlayer video;
+	public MediaView video;
 	
 	public boolean muted;
 	public float clip_start_time;

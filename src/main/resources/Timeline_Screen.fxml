@@ -10,7 +10,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TimelineController">
    <children>
       <Button fx:id="import_button" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#import_file" onMousePressed="#import_select" onMouseReleased="#import_unselect" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Import" />
-      <Button fx:id="export_button" layoutX="510.0" layoutY="261.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Export" />
+      <Button fx:id="export_button" layoutX="510.0" layoutY="261.0" mnemonicParsing="false" onAction="#export" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Export" />
       <ScrollPane fx:id="scroll_pane" layoutX="15.0" layoutY="15.0" prefHeight="240.0" prefWidth="570.0" style="-fx-background: #282828;">
          <content>
             <VBox fx:id="vbox" prefHeight="235.0" prefWidth="565.0" />

@@ -14,6 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -27,6 +30,7 @@ import model.Parameters;
 import model.VideoType;
 import model.VisualType;
 import util.Delta;
+import util.Vector2;
 import view.Global_elements;
 
 
@@ -79,10 +83,17 @@ public void getFile(File in,VBox vbox_parent) {
 		      //imageView.setFitWidth(575);
 		      imageView.setPreserveRatio(true);
 		      media_instance.image_view = imageView;
+		      
+
+				media_instance.preview_height = (float) image.getHeight();
+		    	media_instance.preview_width = (float) image.getWidth();
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+		
+    
+		media_instance.preview_position = new Vector2(0,0);
 		
 		
 		
@@ -148,7 +159,32 @@ public void getFile(File in,VBox vbox_parent) {
         
         
         //TODO create and store mediaView
+		
+        Media media; 
+        
+		try {
+			media = new Media(in.toURI().toURL().toString());
+			
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			
+
+	        
+			MediaView mediaView = new MediaView(mediaPlayer);
+
+	        mediaPlayer.setOnReady(() -> {
+	        	media_instance.preview_height = media.getHeight();
+	        	media_instance.preview_width = media.getWidth();
+	        });
+	        
+	        media_instance.preview_position = new Vector2(0,0);
+	        media_instance.video = mediaView;
+	        
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+        
         //TODO add preview parts
+		
         
       //adding UI elements to timeline grid
       	parent_vbox.getChildren().add(media_box);

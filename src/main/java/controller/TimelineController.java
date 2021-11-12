@@ -1,11 +1,17 @@
 package controller;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.App;
+import model.ImageType;
+import model.MediaType;
+import model.Media_container;
+import model.VideoType;
 import view.Chooser;
 
 public class TimelineController {
@@ -29,7 +35,22 @@ public class TimelineController {
 
 	}
 	 
+	@FXML
+	public void export() {
+		
+        
+        RenderController.init_render();
+        
+        //minimize window
+        //App.timelineStage.setIconified(true);
+        
+        //exits app
+        //Platform.exit();
+
+	}
 	
+	
+
 	@FXML
 	 public void import_select() {
 		import_button.setText("...");

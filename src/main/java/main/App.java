@@ -14,38 +14,47 @@ import view.Global_elements;
 
 public class App extends Application{
 	 	
-	
-	    
+	 	public static Stage previewStage = new Stage();
+	    public static Stage renderStage = new Stage();
+	    public static Stage timelineStage;
+
 	  public void start(Stage primaryStage) {
 		  
+		    timelineStage = primaryStage;
 		  	
 		    new Global_elements();
 			 
-		    Stage previewStage = new Stage();
+		   
 	        //previewStage.initStyle(StageStyle.UNDECORATED);
 		     
 
 		  try {
-			  Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Timeline_Screen.fxml"));
-			  Scene scene = new Scene(root);
-			  primaryStage.setScene(scene);
+			  Parent timelineRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Timeline_Screen.fxml"));
+			  Scene timelineScene = new Scene(timelineRoot);
+			  primaryStage.setScene(timelineScene);
 			  primaryStage.show();
 			  primaryStage.setTitle("Timeline");
 			  primaryStage.setY(550);
 			  primaryStage.setResizable(false);
 			  
 
-				 
+			  Parent previewRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Preview_Screen.fxml"));
+			  Scene previewScene = new Scene(previewRoot);
 
-
-
-			  Parent anotherRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Preview_Screen.fxml"));
-			  Scene anotherScene = new Scene(anotherRoot);
-			  previewStage.setScene(anotherScene);
+			  previewStage.setScene(previewScene);
 			  previewStage.show();
 			  previewStage.setTitle("Preview");
 			  previewStage.setY(100);
 			  previewStage.setResizable(false);
+			  
+			  Parent renderRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Render_Screen.fxml"));
+			  Scene renderScene = new Scene(renderRoot);
+
+			  renderStage.setScene(renderScene);
+			  renderStage.setTitle("Render");
+
+			  renderStage.setY(300);
+			  renderStage.setResizable(false);
 
 
 		  } catch (Exception exc) {

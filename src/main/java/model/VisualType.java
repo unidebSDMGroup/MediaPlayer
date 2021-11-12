@@ -1,10 +1,12 @@
 package model;
 
+import util.Vector2;
+
 public abstract class VisualType extends MediaType {
 	
-	Vector2 preview_position;
-	float preview_width;
-	float preview_height;
+	public Vector2 preview_position;
+	public float preview_width;
+	public float preview_height;
 	
 	
 	
