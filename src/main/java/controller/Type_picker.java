@@ -8,6 +8,7 @@ import java.util.Optional;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -147,11 +148,35 @@ public void getFile(File in,VBox vbox_parent) {
         
         //mute icon
         //TODO mute/unmute function
-         ImageView sound_image = new ImageView();
-         sound_image.setImage(Global_elements.sound_image);
-         sound_image.setFitHeight(30);
-         sound_image.setPreserveRatio(true);
-        params.getChildren().add(sound_image);
+		//creating mute buttons
+		//Color transparent = new Color(0,0,0,0);
+		Button muteButton = new Button();
+		muteButton.setMaxSize(50,50);
+		muteButton.setPrefSize(50,50);
+		//muteButton.setStyle("-fx-background-color:#ffffff");
+		//muteButton.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+		params.getChildren().add(muteButton);
+
+		//adding image to the mute button
+		ImageView sound_image = new ImageView();
+		sound_image.setImage(Global_elements.sound_image);
+		sound_image.setFitHeight(30);
+		sound_image.setPreserveRatio(true);
+		muteButton.setGraphic(sound_image);
+
+		//button click setting mute and changing image to notify muted/unmuted
+		muteButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if(media_instance.muted == true){
+					media_instance.muted = false;
+					sound_image.setImage(Global_elements.sound_image);
+				}else{
+					media_instance.muted = true;
+					sound_image.setImage(Global_elements.mute_image);
+				}
+			}
+		});
         
         
         media_box.getChildren().add(params);
