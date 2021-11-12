@@ -1,10 +1,11 @@
 package model;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ImageType extends VisualType  {
 
-	Image img;
+	public ImageView image_view;
 	
 	public ImageType(){
 		

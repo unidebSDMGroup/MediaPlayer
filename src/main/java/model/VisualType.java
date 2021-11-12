@@ -7,5 +7,7 @@ public abstract class VisualType extends MediaType {
 	float preview_height;
 	
 	
+	
+	
 
 }
