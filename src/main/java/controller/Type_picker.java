@@ -42,15 +42,16 @@ public void getFile(File in,VBox vbox_parent) {
 		
 		switch (getExtensionByStringHandling(in.toString()).get()) {
 		
-		case "mp4" : getVideo(in,vbox_parent); break;
+		case "mp4" : init_Video(in,vbox_parent); break;
 		case "jpg" : init_Image(in,vbox_parent); break;
-		case "mp3" : getAudio(in); break;
+		case "mp3" : init_Audio(in); break;
 		default:
 			break;
 		}
 			
 	} 
 	
+
 	public Optional<String> getExtensionByStringHandling(String filename) {
 		
 	    return Optional.ofNullable(filename)
@@ -60,7 +61,7 @@ public void getFile(File in,VBox vbox_parent) {
 	 
 	public void init_media(MediaType media_instance) {
 		
-		media_instance.name = "Image layer "+Media_container.media_collection.size();
+		media_instance.name = "Media layer "+Media_container.media_collection.size();
 		media_instance.color = Color.PURPLE;
 		
 		Media_container.media_collection.add(media_instance);
@@ -73,6 +74,35 @@ public void getFile(File in,VBox vbox_parent) {
 		init_media(media_instance);
         
         
+		  //media box ( parameters box, rectangle )
+        HBox media_box = new HBox(30);
+        Label name = new Label(media_instance.name);
+        
+        //parameters box ( name, icon, color,hidden icon, mute icon )
+        HBox params = new HBox(20);
+        params.setAlignment(Pos.CENTER_LEFT);
+        params.getChildren().add(name);
+        
+        //mute icon
+		//creating mute buttons
+		//Color transparent = new Color(0,0,0,0);
+		Button muteButton = new Button();
+		muteButton.setMaxSize(50,50);
+		muteButton.setPrefSize(50,50);
+		muteButton.setStyle("-fx-background-color: #282828");
+		//muteButton.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+		params.getChildren().add(muteButton);
+
+		//adding image to the mute button
+		ImageView sound_image = new ImageView();
+		sound_image.setImage(Global_elements.sound_image);
+		sound_image.setFitHeight(20);
+		sound_image.setPreserveRatio(true);
+		muteButton.setGraphic(sound_image);
+
+        
+        
+        media_box.getChildren().add(params);
         
 		//image creation
 		try {
@@ -93,7 +123,8 @@ public void getFile(File in,VBox vbox_parent) {
 			e.printStackTrace();
 		}
 		
-    
+      	parent_vbox.getChildren().add(media_box);
+
 		media_instance.preview_position = new Vector2(0,0);
 		
 		
@@ -101,7 +132,7 @@ public void getFile(File in,VBox vbox_parent) {
 		//TODO add preview parts
 	}
 	
-	public void getVideo(File in, VBox parent_vbox) {
+	public void init_Video(File in, VBox parent_vbox) {
 
 		VideoType media_instance = new VideoType();
 		
@@ -138,29 +169,28 @@ public void getFile(File in,VBox vbox_parent) {
 	      });
         
         //media box ( parameters box, rectangle )
-        HBox media_box = new HBox(50);
+        HBox media_box = new HBox(30);
         Label name = new Label(media_instance.name);
         
-        //parameters box ( name, icon, color, mute icon )
+        //parameters box ( name, icon, color,hidden icon, mute icon )
         HBox params = new HBox(20);
         params.setAlignment(Pos.CENTER_LEFT);
         params.getChildren().add(name);
         
         //mute icon
-        //TODO mute/unmute function
 		//creating mute buttons
 		//Color transparent = new Color(0,0,0,0);
 		Button muteButton = new Button();
 		muteButton.setMaxSize(50,50);
 		muteButton.setPrefSize(50,50);
-		//muteButton.setStyle("-fx-background-color:#ffffff");
+		muteButton.setStyle("-fx-background-color: #282828");
 		//muteButton.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 		params.getChildren().add(muteButton);
 
 		//adding image to the mute button
 		ImageView sound_image = new ImageView();
 		sound_image.setImage(Global_elements.sound_image);
-		sound_image.setFitHeight(30);
+		sound_image.setFitHeight(20);
 		sound_image.setPreserveRatio(true);
 		muteButton.setGraphic(sound_image);
 
@@ -214,7 +244,7 @@ public void getFile(File in,VBox vbox_parent) {
       //adding UI elements to timeline grid
       	parent_vbox.getChildren().add(media_box);
 	}
-	public void getAudio(File in) {
+	public void init_Audio(File in) {
 		 //TODO create audio
 	}
 	 
