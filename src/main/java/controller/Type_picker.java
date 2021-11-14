@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Parameter;
 import java.net.MalformedURLException;
 import java.util.Optional;
+import java.util.Stack;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -22,6 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import model.AudioType;
 import model.ImageType;
@@ -36,15 +39,18 @@ import view.Global_elements;
 
 
 public class Type_picker {
+	public boolean zoneGenerated = false;
+	public double startxlimit = -135;
+	public double finishxlimit = 275;
 	
-public void getFile(File in,VBox vbox_parent) {
+public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 	
 		
 		switch (getExtensionByStringHandling(in.toString()).get()) {
 		
-		case "mp4" : init_Video(in,vbox_parent); break;
-		case "jpg" : init_Image(in,vbox_parent); break;
-		case "mp3" : init_Audio(in); break;
+		case "mp4" : init_Video(in,vbox_parent,stack_pane); break;
+		case "jpg" : init_Image(in,vbox_parent,stack_pane); break;
+		case "mp3" : init_Audio(in,stack_pane); break;
 		default:
 			break;
 		}
@@ -67,7 +73,7 @@ public void getFile(File in,VBox vbox_parent) {
 		Media_container.media_collection.add(media_instance);
 	}
 	
-	public void init_Image(File in, VBox parent_vbox) {
+	public void init_Image(File in, VBox parent_vbox,StackPane stack_pane) {
 		
 		ImageType media_instance = new ImageType();
 		
@@ -124,6 +130,7 @@ public void getFile(File in,VBox vbox_parent) {
 		}
 		
       	parent_vbox.getChildren().add(media_box);
+		zoneSelectors(stack_pane);
 
 		media_instance.preview_position = new Vector2(0,0);
 		
@@ -132,7 +139,7 @@ public void getFile(File in,VBox vbox_parent) {
 		//TODO add preview parts
 	}
 	
-	public void init_Video(File in, VBox parent_vbox) {
+	public void init_Video(File in, VBox parent_vbox, StackPane stack_pane) {
 
 		VideoType media_instance = new VideoType();
 		
@@ -179,12 +186,10 @@ public void getFile(File in,VBox vbox_parent) {
         
         //mute icon
 		//creating mute buttons
-		//Color transparent = new Color(0,0,0,0);
 		Button muteButton = new Button();
 		muteButton.setMaxSize(50,50);
 		muteButton.setPrefSize(50,50);
 		muteButton.setStyle("-fx-background-color: #282828");
-		//muteButton.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 		params.getChildren().add(muteButton);
 
 		//adding image to the mute button
@@ -243,9 +248,124 @@ public void getFile(File in,VBox vbox_parent) {
         
       //adding UI elements to timeline grid
       	parent_vbox.getChildren().add(media_box);
+
+		zoneSelectors(stack_pane);
 	}
-	public void init_Audio(File in) {
+
+	//zone selectors generation
+	public void zoneSelectors(StackPane stack_pane){
+
+        if(!zoneGenerated) {
+			//start line
+			double height = 250;
+			Rectangle line = new Rectangle(0, 5, 5, height);
+			line.setFill(Color.RED);
+			//finish line generation
+			Rectangle line2 = new Rectangle(0, 5, 5, height);
+			line2.setFill(Color.BLUE);
+			//x label for start
+			Label startxlabel = new Label();
+			startxlabel.setTextFill(Color.WHITE);
+			startxlabel.setTranslateY(-133);
+			//x label for finish
+			Label finishxlabel = new Label();
+			finishxlabel.setTextFill(Color.WHITE);
+			finishxlabel.setTranslateY(-133);
+
+
+			//start line events
+			final Delta dragDelta = new Delta();
+			line.setOnMousePressed(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent mouseEvent) {
+					// record a delta distance for the drag and drop operation.
+					dragDelta.x = line.getTranslateX() - mouseEvent.getSceneX();
+					dragDelta.y = line.getTranslateY() - mouseEvent.getSceneY();
+					line.setCursor(Cursor.MOVE);
+				}
+			});
+			line.setOnMouseReleased(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent mouseEvent) {
+					line.setCursor(Cursor.HAND);
+					double offset = 10;
+					if (line.getTranslateX() >= line2.getTranslateX() - offset) {
+						line.setTranslateX(line.getTranslateX() - offset);
+					}
+					if(line.getTranslateX() < startxlimit){
+						line.setTranslateX(startxlimit + 1);
+					}
+				}
+			});
+			line.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent mouseEvent) {
+
+					double offset = 10;
+					if ((line.getTranslateX() <= line2.getTranslateX() - offset) && (line.getTranslateX() >= -135)) {
+						line.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
+
+					}
+					//System.out.println("start line x: " + line.getTranslateX());
+					String line1x = Double.toString(line.getTranslateX());
+					startxlabel.setText(line1x);
+					startxlabel.setTranslateX(line.getTranslateX());
+
+
+				}
+			});
+
+			//finish line events
+			final Delta dragDelta2 = new Delta();
+			line2.setOnMousePressed(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent mouseEvent) {
+					// record a delta distance for the drag and drop operation.
+					dragDelta2.x = line2.getTranslateX() - mouseEvent.getSceneX();
+					dragDelta2.y = line2.getTranslateY() - mouseEvent.getSceneY();
+					line2.setCursor(Cursor.MOVE);
+				}
+			});
+			line2.setOnMouseReleased(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent mouseEvent) {
+					line2.setCursor(Cursor.HAND);
+					double offset = 10;
+					if (line2.getTranslateX() <= line.getTranslateX() + offset) {
+						line2.setTranslateX(line.getTranslateX() + offset);
+					}
+					if(line2.getTranslateX() >= finishxlimit){
+						line2.setTranslateX(finishxlimit - 1);
+					}
+
+				}
+			});
+			line2.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent mouseEvent) {
+					double offset = 10;
+					if ((line2.getTranslateX() >= line.getTranslateX() + offset) && (line2.getTranslateX() < 275)) {
+						line2.setTranslateX(mouseEvent.getSceneX() + dragDelta2.x);
+					}
+					//System.out.println("finish line x: " + line2.getTranslateX());
+					String line2x = Double.toString(line2.getTranslateX());
+					finishxlabel.setText(line2x);
+					finishxlabel.setTranslateX(line2.getTranslateX());
+
+				}
+			});
+
+			stack_pane.getChildren().add(line2);
+			line2.toFront();
+			line2.setTranslateX(20);
+			stack_pane.getChildren().add(line);
+			line.toFront();
+			stack_pane.getChildren().add(startxlabel);
+			startxlabel.toFront();
+			stack_pane.getChildren().add(finishxlabel);
+			finishxlabel.toFront();
+			zoneGenerated = true;
+		}
+
+	}
+
+	public void init_Audio(File in, StackPane stack_pane) {
 		 //TODO create audio
+		zoneSelectors(stack_pane);
 	}
 	 
 }

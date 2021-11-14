@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.App;
@@ -28,10 +29,12 @@ public class TimelineController {
 	 public Button export_button;
 	@FXML
 	public VBox vbox;
+	@FXML
+	public StackPane stack_pane;
 	
 	@FXML
 	public void import_file() {
-        picker.getFile( chooser.fileChooser.showOpenDialog(stage),vbox);
+        picker.getFile( chooser.fileChooser.showOpenDialog(stage),vbox,stack_pane);
 
 	}
 	 
