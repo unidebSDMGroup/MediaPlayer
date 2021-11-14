@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.util.Optional;
 import java.util.Stack;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -40,8 +42,7 @@ import view.Global_elements;
 
 public class Type_picker {
 	public boolean zoneGenerated = false;
-	public double startxlimit = -135;
-	public double finishxlimit = 275;
+	//XXX global variables are bad
 	
 public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 	
@@ -251,113 +252,88 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 
 		zoneSelectors(stack_pane);
 	}
+	
+	
+	public void create_line(StackPane stack_pane,int height,int offset,int edge_limit,boolean start_flag) {
+		
+		Rectangle line = new Rectangle(0, 5, 5, height);
+		if ( start_flag ) line.setFill(Color.RED);
+		else line.setFill(Color.BLUE);
+		
+		//x label for start
+		Label line_label = new Label();
+		line_label.setTextFill(Color.WHITE);
+		line_label.setTranslateY(-133);
+		
+		//FIXME change delta to vector2
+		//FIXME attempt to create the line out of an actual line
+		
+		//start line events
+		final Delta dragDelta = new Delta();
+		line.setOnMousePressed(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent mouseEvent) {
+				// record a delta distance for the drag and drop operation.
+				dragDelta.x = line.getTranslateX() - mouseEvent.getSceneX();
+				dragDelta.y = line.getTranslateY() - mouseEvent.getSceneY();
+				line.setCursor(Cursor.MOVE);
+			}
+		});
+		
+		SimpleBooleanProperty start_cond = new SimpleBooleanProperty();
+		SimpleBooleanProperty end_cond = new SimpleBooleanProperty();
+		 
+		line.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent mouseEvent) {
+
+				start_cond.set((mouseEvent.getSceneX() + dragDelta.x <= Parameters.timeline_region_end_time - offset) 
+						&& (mouseEvent.getSceneX() + dragDelta.x >= edge_limit));
+				
+				end_cond.set((mouseEvent.getSceneX() + dragDelta.x >= Parameters.timeline_region_start_time + offset) 
+						&& (mouseEvent.getSceneX() + dragDelta.x < edge_limit));
+				
+			if (start_flag ? start_cond.get() : end_cond.get()) {
+				
+					line.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
+			}
+				//System.out.println("start line x: " + line.getTranslateX());
+				line_label.setText(Double.toString(line.getTranslateX()));
+				line_label.setTranslateX(line.getTranslateX());
+				
+				if ( start_flag ) Parameters.timeline_region_start_time = (float) line.getTranslateX();
+				else Parameters.timeline_region_end_time = (float) line.getTranslateX();
+				
+			}
+		});
+
+		stack_pane.getChildren().add(line);
+		line.toFront();
+		if ( start_flag) {
+			line.setTranslateX(-20);
+			Parameters.timeline_region_start_time = -20;
+		}
+			line_label.setText(Double.toString(line.getTranslateX()));
+			line_label.setTranslateX(line.getTranslateX());
+
+		stack_pane.getChildren().add(line_label);
+		line_label.toFront();
+	}
+	
 
 	//zone selectors generation
 	public void zoneSelectors(StackPane stack_pane){
 
         if(!zoneGenerated) {
+        	
 			//start line
-			double height = 250;
-			Rectangle line = new Rectangle(0, 5, 5, height);
-			line.setFill(Color.RED);
-			//finish line generation
-			Rectangle line2 = new Rectangle(0, 5, 5, height);
-			line2.setFill(Color.BLUE);
-			//x label for start
-			Label startxlabel = new Label();
-			startxlabel.setTextFill(Color.WHITE);
-			startxlabel.setTranslateY(-133);
-			//x label for finish
-			Label finishxlabel = new Label();
-			finishxlabel.setTextFill(Color.WHITE);
-			finishxlabel.setTranslateY(-133);
+			int height = 250;
+			int startxlimit = -135;
+			int finishxlimit = 275;
+			
+			int offset = 10;
+			
+			create_line(stack_pane, height, offset, startxlimit, true);
+			create_line(stack_pane, height, offset, finishxlimit, false);
 
-
-			//start line events
-			final Delta dragDelta = new Delta();
-			line.setOnMousePressed(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent mouseEvent) {
-					// record a delta distance for the drag and drop operation.
-					dragDelta.x = line.getTranslateX() - mouseEvent.getSceneX();
-					dragDelta.y = line.getTranslateY() - mouseEvent.getSceneY();
-					line.setCursor(Cursor.MOVE);
-				}
-			});
-			line.setOnMouseReleased(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent mouseEvent) {
-					line.setCursor(Cursor.HAND);
-					double offset = 10;
-					if (line.getTranslateX() >= line2.getTranslateX() - offset) {
-						line.setTranslateX(line.getTranslateX() - offset);
-					}
-					if(line.getTranslateX() < startxlimit){
-						line.setTranslateX(startxlimit + 1);
-					}
-				}
-			});
-			line.setOnMouseDragged(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent mouseEvent) {
-
-					double offset = 10;
-					if ((line.getTranslateX() <= line2.getTranslateX() - offset) && (line.getTranslateX() >= -135)) {
-						line.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
-
-					}
-					//System.out.println("start line x: " + line.getTranslateX());
-					String line1x = Double.toString(line.getTranslateX());
-					startxlabel.setText(line1x);
-					startxlabel.setTranslateX(line.getTranslateX());
-
-
-				}
-			});
-
-			//finish line events
-			final Delta dragDelta2 = new Delta();
-			line2.setOnMousePressed(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent mouseEvent) {
-					// record a delta distance for the drag and drop operation.
-					dragDelta2.x = line2.getTranslateX() - mouseEvent.getSceneX();
-					dragDelta2.y = line2.getTranslateY() - mouseEvent.getSceneY();
-					line2.setCursor(Cursor.MOVE);
-				}
-			});
-			line2.setOnMouseReleased(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent mouseEvent) {
-					line2.setCursor(Cursor.HAND);
-					double offset = 10;
-					if (line2.getTranslateX() <= line.getTranslateX() + offset) {
-						line2.setTranslateX(line.getTranslateX() + offset);
-					}
-					if(line2.getTranslateX() >= finishxlimit){
-						line2.setTranslateX(finishxlimit - 1);
-					}
-
-				}
-			});
-			line2.setOnMouseDragged(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent mouseEvent) {
-					double offset = 10;
-					if ((line2.getTranslateX() >= line.getTranslateX() + offset) && (line2.getTranslateX() < 275)) {
-						line2.setTranslateX(mouseEvent.getSceneX() + dragDelta2.x);
-					}
-					//System.out.println("finish line x: " + line2.getTranslateX());
-					String line2x = Double.toString(line2.getTranslateX());
-					finishxlabel.setText(line2x);
-					finishxlabel.setTranslateX(line2.getTranslateX());
-
-				}
-			});
-
-			stack_pane.getChildren().add(line2);
-			line2.toFront();
-			line2.setTranslateX(20);
-			stack_pane.getChildren().add(line);
-			line.toFront();
-			stack_pane.getChildren().add(startxlabel);
-			startxlabel.toFront();
-			stack_pane.getChildren().add(finishxlabel);
-			finishxlabel.toFront();
 			zoneGenerated = true;
 		}
 
