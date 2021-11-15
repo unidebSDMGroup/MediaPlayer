@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Parameter;
 import java.net.MalformedURLException;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Stack;
 
 import javafx.beans.property.BooleanProperty;
@@ -29,6 +30,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import model.AudioType;
+import model.Color_table;
 import model.ImageType;
 import model.MediaType;
 import model.Media_container;
@@ -42,7 +44,6 @@ import view.Global_elements;
 
 public class Type_picker {
 	public boolean zoneGenerated = false;
-	//XXX global variables are bad
 	
 public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 	
@@ -67,9 +68,18 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 	}
 	 
 	public void init_media(MediaType media_instance) {
+		//TODO add video length variation
+		//TODO add preview stuff
+		//TODO convert pixels to time
 		
 		media_instance.name = "Media layer "+Media_container.media_collection.size();
-		media_instance.color = Color.PURPLE;
+		
+		Random rand = new Random();
+		int a = rand.nextInt(Color_table.colors.size());
+		
+		media_instance.color = Color_table.colors.get(a);
+		
+		
 		
 		Media_container.media_collection.add(media_instance);
 	}
@@ -146,12 +156,55 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 		
 		init_media(media_instance);
 		
+		//TODO create and store mediaView
+		
+        Media media; 
+        Rectangle rectangle = new Rectangle();
+        Rectangle prev_rectangle = new Rectangle();
+
+		try {
+			media = new Media(in.toURI().toURL().toString());
+			
+			
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			
+
+	        
+			MediaView mediaView = new MediaView(mediaPlayer);
+
+	        mediaPlayer.setOnReady(() -> {
+	        	media_instance.preview_height = media.getHeight();
+	        	media_instance.preview_width = media.getWidth();
+				media_instance.duration = media.getDuration().toMillis()/Parameters.PPMS;
+				
+				prev_rectangle.setWidth(media_instance.preview_width/4);
+				prev_rectangle.setHeight(media_instance.preview_height/4);
+
+		        rectangle.setWidth(media_instance.duration);
+
+	        });
+	        
+	        
+	        media_instance.preview_position = new Vector2(0,0);
+	        media_instance.video = mediaView;
+	        
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(media_instance.duration);
+		
 		//rectangle creation and fill
-		Stop[] stops = new Stop[] { new Stop(0, Color.PURPLE), new Stop(1, Color.GREY)};
+		Stop[] stops = new Stop[] { new Stop(0, media_instance.color), new Stop(1, Color.GREY)};
         LinearGradient lg1 = new LinearGradient(0, 0, 2, 1, true, CycleMethod.NO_CYCLE, stops);
         
-        Rectangle rectangle = new Rectangle(0, 0, 200, 50);
+        
+        rectangle.setHeight(50);
         rectangle.setFill(lg1);
+        
+        
+        prev_rectangle.setFill(media_instance.color);
         
         //rectangle events
         final Delta dragDelta = new Delta(); 
@@ -219,33 +272,11 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
         media_box.getChildren().add(rectangle);
         
         
-        //TODO create and store mediaView
-		
-        Media media; 
         
-		try {
-			media = new Media(in.toURI().toURL().toString());
-			
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			
-
-	        
-			MediaView mediaView = new MediaView(mediaPlayer);
-
-	        mediaPlayer.setOnReady(() -> {
-	        	media_instance.preview_height = media.getHeight();
-	        	media_instance.preview_width = media.getWidth();
-	        });
-	        
-	        media_instance.preview_position = new Vector2(0,0);
-	        media_instance.video = mediaView;
-	        
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+     
         
         //TODO add preview parts
-		
+		PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
         
       //adding UI elements to timeline grid
       	parent_vbox.getChildren().add(media_box);

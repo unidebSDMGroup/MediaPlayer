@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Color_table;
 import view.Global_elements;
 
 public class App extends Application{
@@ -23,6 +24,7 @@ public class App extends Application{
 		    timelineStage = primaryStage;
 		  	
 		    new Global_elements();
+		    new Color_table();
 			 
 		   
 	        //previewStage.initStyle(StageStyle.UNDECORATED);

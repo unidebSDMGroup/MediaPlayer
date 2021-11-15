@@ -6,6 +6,7 @@
   <name>MonkePlayer</name>
   <description>Monke be chimpin</description>
   <properties>
+   	    <maven.compiler.release>15</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
         <exec.mainClass>base.Launcher</exec.mainClass>
@@ -54,14 +55,14 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>2.22.2</version>
         </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>8</source>
-                <target>8</target>
-            </configuration>
-        </plugin>
+      <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.0</version>
+    <configuration>
+        <release>15</release>
+    </configuration>
+</plugin>
     </plugins>
   </build> 
 </project>

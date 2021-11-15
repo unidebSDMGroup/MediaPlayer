@@ -3,6 +3,7 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -22,6 +23,7 @@ public class TimelineController {
 	private Chooser chooser = new Chooser();
 
 	 
+	
 
 	@FXML
 	 public Button import_button;
@@ -31,6 +33,13 @@ public class TimelineController {
 	public VBox vbox;
 	@FXML
 	public StackPane stack_pane;
+	
+	
+	
+	 @FXML
+	    public void initialize() {
+		 //vbox.setAlignment(Pos.CENTER_RIGHT);
+	    }
 	
 	@FXML
 	public void import_file() {
