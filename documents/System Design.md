@@ -5,22 +5,16 @@
 At the very basic functional level the product should deliver the following core functionalities.
 
 - Working application in a windows enviroment.
-
 - Import multiple videos/images/audio from files with preset file types.
-
 - Allow editing of size,timeline location of imported media elements.
-
 - Export the combined video into a video file.
 
 
 ##II . Theoretical Development Strategy.
 
 - SCRUM model for development cycles.
-
 - Project Building using Maven.
-
 - Media Application using JavaFX .
-
 - Testing JUnit and FX-Testing.
 
 //should incluide a project timeline
@@ -128,118 +122,6 @@ Hierarchy of the application loop:
 
 Note: This is based on how it functions currently and is not extensive.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## II . Project Plan.
-
-The project will consist of several phases, pre study and design initially and the scrum cycles
-
-with implementation and testing.
-
-### 1 - Pre-study.
-
-
-
-### 2 - Design.
-
-This phase consists of research and idea development for the purpose of shaping the desired model of our project. Both visual and architectural resources will serve as references in order to conceptualize the system.
-
-
-### 3 - Implementation.
-This phase consists of the system creation. With designs and architectures being in place. we move on to writing code and preforming tests.
-### 4-Testing.
-## III . Business Project Model
-This Project will use Business-to-consumer model. The finished product will be directly sold to a broadasting company which acts as a consumer in this case.
-
-## IV . Requirement List
-
-### 1 - General System Requirements.
-
--file type compatibilities.
--export and import function.
-
-### 2 - Visuals and UI Requirements.
-
--timeline.
--zone selector.
--thumbnails.
-
-## V . Functional Design
-
-## VI . Use Case
-There will be two screens for the user: Timeline Screen / Preview Screen. The user can easily upload and use media files via file import. Timeline screen will be used for editing images and videos allowing the user to set the start-end points of each video and mute/unmute them while the preview screen will be used for plotting videos, images, and resizing them. For the user’s sake, with the help of export, the final version of the all simultaneously playing videos will be displayed in a new window called the render screen. They can be played and paused on this screen.
-
-![back](/resources/images/UseCaseDiagram.jpg)
-
-## VII . plan schedule
 
 ## VIII . Testing Plan
 
