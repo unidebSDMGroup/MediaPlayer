@@ -8,6 +8,8 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Color_table;
@@ -64,8 +66,27 @@ public class App extends Application{
 			  exc.printStackTrace();
 
 		  }
+		  
+
+			//for (int i = 180 ; i < 4000; i=i+20) {
+				create_line(10);
+			//}
+			
+			
 	        
 	    }
+	  
+	  public void create_line(int position) {
+			 Line line = new Line(0, 0, 0, 250);
+			 line.setStroke(Color.GREY);
+			
+	         line.setStrokeWidth(1);
+	         
+	         TimelineController.static_stack_pane.getChildren().add(line);
+	         line.setViewOrder(100);
+	         
+	         line.setTranslateX(position);
+		 }
 	  
 	
 }

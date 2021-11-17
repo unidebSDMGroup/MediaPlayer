@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -42,10 +43,11 @@ import util.Vector2;
 import view.Global_elements;
 
 
+
 public class Type_picker {
 	public boolean zoneGenerated = false;
 	
-public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
+public void getFile(File in,VBox vbox_parent,AnchorPane stack_pane) {
 	
 		
 		switch (getExtensionByStringHandling(in.toString()).get()) {
@@ -84,7 +86,7 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 		Media_container.media_collection.add(media_instance);
 	}
 	
-	public void init_Image(File in, VBox parent_vbox,StackPane stack_pane) {
+	public void init_Image(File in, VBox parent_vbox,AnchorPane stack_pane) {
 		
 		ImageType media_instance = new ImageType();
 		
@@ -97,6 +99,8 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
         
         //parameters box ( name, icon, color,hidden icon, mute icon )
         HBox params = new HBox(20);
+      
+
         params.setAlignment(Pos.CENTER_LEFT);
         params.getChildren().add(name);
         
@@ -150,7 +154,7 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 		//TODO add preview parts
 	}
 	
-	public void init_Video(File in, VBox parent_vbox, StackPane stack_pane) {
+	public void init_Video(File in, VBox parent_vbox, AnchorPane stack_pane) {
 
 		VideoType media_instance = new VideoType();
 		
@@ -193,7 +197,6 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 		}
 		
 		
-		System.out.println(media_instance.duration);
 		
 		//rectangle creation and fill
 		Stop[] stops = new Stop[] { new Stop(0, media_instance.color), new Stop(1, Color.GREY)};
@@ -235,6 +238,12 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
         
         //parameters box ( name, icon, color,hidden icon, mute icon )
         HBox params = new HBox(20);
+        
+        //keeps the parameters box from resizing
+        params.setMaxWidth(150);
+        params.setPrefWidth(150);
+        params.setMinWidth(150);
+        
         params.setAlignment(Pos.CENTER_LEFT);
         params.getChildren().add(name);
         
@@ -285,7 +294,7 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 	}
 	
 	
-	public void create_line(StackPane stack_pane,int height,int offset,int edge_limit,boolean start_flag) {
+	public void create_line(AnchorPane stack_pane,int height,int offset,int edge_limit,boolean start_flag) {
 		
 		Rectangle line = new Rectangle(0, 5, 5, height);
 		if ( start_flag ) line.setFill(Color.RED);
@@ -338,20 +347,27 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 
 		stack_pane.getChildren().add(line);
 		line.toFront();
+		line.setTranslateX(-(stack_pane.getWidth()/2)+180);
+
 		if ( start_flag) {
-			line.setTranslateX(-20);
 			Parameters.timeline_region_start_time = -20;
+		}
+		else {
+			line.setTranslateX(50);
+
 		}
 			line_label.setText(Double.toString(line.getTranslateX()));
 			line_label.setTranslateX(line.getTranslateX());
 
 		stack_pane.getChildren().add(line_label);
 		line_label.toFront();
+		
+		System.out.println(line.getTranslateX());
 	}
 	
 
 	//zone selectors generation
-	public void zoneSelectors(StackPane stack_pane){
+	public void zoneSelectors(AnchorPane stack_pane){
 
         if(!zoneGenerated) {
         	
@@ -370,7 +386,7 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 
 	}
 
-	public void init_Audio(File in, StackPane stack_pane) {
+	public void init_Audio(File in, AnchorPane stack_pane) {
 		 //TODO create audio
 		zoneSelectors(stack_pane);
 	}

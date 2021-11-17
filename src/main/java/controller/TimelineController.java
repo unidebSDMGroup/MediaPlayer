@@ -5,9 +5,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import main.App;
 import model.ImageType;
@@ -32,17 +35,25 @@ public class TimelineController {
 	@FXML
 	public VBox vbox;
 	@FXML
-	public StackPane stack_pane;
+	public AnchorPane stack_pane;
 	
+	public static AnchorPane static_stack_pane;
 	
 	
 	 @FXML
 	    public void initialize() {
-		 //vbox.setAlignment(Pos.CENTER_RIGHT);
-	    }
+		 
+		 vbox.setViewOrder(10);
+		 static_stack_pane = stack_pane;
+         }
+	 
+	
 	
 	@FXML
 	public void import_file() {
+		
+		
+		
         picker.getFile( chooser.fileChooser.showOpenDialog(stage),vbox,stack_pane);
 
 	}
