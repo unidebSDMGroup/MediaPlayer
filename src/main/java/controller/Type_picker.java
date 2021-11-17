@@ -43,7 +43,7 @@ import view.Global_elements;
 
 
 public class Type_picker {
-	public boolean zoneGenerated = false;
+//	public boolean zoneGenerated = false;
 	
 public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 	
@@ -141,7 +141,7 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 		}
 		
       	parent_vbox.getChildren().add(media_box);
-		zoneSelectors(stack_pane);
+		//zoneSelectors(stack_pane);
 
 		media_instance.preview_position = new Vector2(0,0);
 		
@@ -281,11 +281,11 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
       //adding UI elements to timeline grid
       	parent_vbox.getChildren().add(media_box);
 
-		zoneSelectors(stack_pane);
+		//zoneSelectors(stack_pane);
 	}
 	
-	
-	public void create_line(StackPane stack_pane,int height,int offset,int edge_limit,boolean start_flag) {
+	//create lines commented will remove later leaving just incase
+	/*public void create_line(StackPane stack_pane,int height,int offset,int edge_limit,boolean start_flag) {
 		
 		Rectangle line = new Rectangle(0, 5, 5, height);
 		if ( start_flag ) line.setFill(Color.RED);
@@ -347,11 +347,11 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 
 		stack_pane.getChildren().add(line_label);
 		line_label.toFront();
-	}
+	}*/
 	
 
-	//zone selectors generation
-	public void zoneSelectors(StackPane stack_pane){
+	//zone selectors generation commented will remove later leaving just incase
+	/*public void zoneSelectors(StackPane stack_pane){
 
         if(!zoneGenerated) {
         	
@@ -368,11 +368,11 @@ public void getFile(File in,VBox vbox_parent,StackPane stack_pane) {
 			zoneGenerated = true;
 		}
 
-	}
+	}*/
 
 	public void init_Audio(File in, StackPane stack_pane) {
 		 //TODO create audio
-		zoneSelectors(stack_pane);
+		//zoneSelectors(stack_pane);
 	}
 	 
 }
