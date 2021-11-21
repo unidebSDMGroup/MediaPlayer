@@ -4,13 +4,17 @@ import java.util.ResourceBundle;
 
 import javax.print.DocFlavor.URL;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import main.App;
 import model.ImageType;
 import model.MediaType;
 import model.Media_container;
+import model.Parameters;
 import model.VideoType;
 
 public class RenderController {
@@ -56,6 +60,7 @@ public class RenderController {
 	}
 	
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void render_video(VideoType vt) {
 		
 		vt.video.getMediaPlayer().play();
@@ -63,8 +68,11 @@ public class RenderController {
 		vt.video.setY(vt.preview_position.y);
 		vt.video.setFitHeight(vt.preview_height);
 		vt.video.setFitWidth(vt.preview_width);
+		vt.video.getMediaPlayer().seek(new Duration(Parameters.timeline_region_start_time-vt.clip_start_time));
+		vt.video.getMediaPlayer().setStopTime(new Duration(Parameters.timeline_region_end_time-vt.clip_start_time));
 		
 		static_pane.getChildren().add(vt.video);
+		
 
 		
 	}
