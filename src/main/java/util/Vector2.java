@@ -9,6 +9,9 @@ public class Vector2 {
 		this.x = x;
 		this.y = y;
 	}
+	public Vector2() {
+	}
+	
 	@Override
 	public String toString() {
 		return "("+x+","+y+")";

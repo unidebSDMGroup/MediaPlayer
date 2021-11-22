@@ -8,10 +8,7 @@ public class VideoType extends VisualType {
 
 	public MediaView video;
 	
-	public boolean muted;
-	public float clip_start_time;
-	public float clip_end_time;
-	public double duration;
+	
 	
 	public VideoType() {
 	}

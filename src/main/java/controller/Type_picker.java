@@ -84,8 +84,25 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		Random rand = new Random();
 		int a = rand.nextInt(Color_table.colors.size());
 		
-		media_instance.color = Color_table.colors.get(a);
+		int table_len = Color_table.colors.entrySet().toArray().length;
+		//System.out.println("starting at "+a);
 		
+		for (int j = a ; true ; j = ((j==(table_len-1))? j=0 : j+1)) {
+			if ( (Boolean)Color_table.colors.values().toArray()[j] == false) {
+				//System.out.println("color free .. picking it");
+				Color_table.colors.put((Color) Color_table.colors.keySet().toArray()[j], true);
+				media_instance.color = (Color) Color_table.colors.keySet().toArray()[j];
+
+				break;
+			}
+			else {
+				//System.out.println(j);
+
+				//System.out.println("still looking");
+
+			}
+			
+		}
 		
 		
 		Media_container.media_collection.add(media_instance);
@@ -97,38 +114,15 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		
 		init_media(media_instance);
         
-        
-		  //media box ( parameters box, rectangle )
-        HBox media_box = new HBox(30);
-        Label name = new Label(media_instance.name);
-        
-        //parameters box ( name, icon, color,hidden icon, mute icon )
-        HBox params = new HBox(20);
-      
+		 Rectangle prev_rectangle =  add_preview_UI(media_instance);
+			PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
+			
 
-        params.setAlignment(Pos.CENTER_LEFT);
-        params.getChildren().add(name);
-        
-        //mute icon
-		//creating mute buttons
-		//Color transparent = new Color(0,0,0,0);
-		Button muteButton = new Button();
-		muteButton.setMaxSize(50,50);
-		muteButton.setPrefSize(50,50);
-		muteButton.setStyle("-fx-background-color: #282828");
-		//muteButton.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
-		params.getChildren().add(muteButton);
-
-		//adding image to the mute button
-		ImageView sound_image = new ImageView();
-		sound_image.setImage(Global_elements.sound_image);
-		sound_image.setFitHeight(20);
-		sound_image.setPreserveRatio(true);
-		muteButton.setGraphic(sound_image);
-
-        
-        
-        media_box.getChildren().add(params);
+	        Rectangle rectangle = add_timeline_UI(media_instance, media_start_label);
+	      	parent_vbox.getChildren().add(rectangle);
+	      	
+			HBox params = add_layer_parameters(media_instance);
+	      	layer_vbox.getChildren().add(params); 
         
 		//image creation
 		try {
@@ -141,22 +135,16 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		      imageView.setPreserveRatio(true);
 		      media_instance.image_view = imageView;
 		      
-
+		      
 				media_instance.preview_height = (float) image.getHeight();
 		    	media_instance.preview_width = (float) image.getWidth();
+		    	
+		    	prev_rectangle.setWidth(image.getHeight()/2);
+				prev_rectangle.setHeight(image.getWidth()/2);
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
-      	parent_vbox.getChildren().add(media_box);
-		//zoneSelectors(stack_pane);
-
-		media_instance.preview_position = new Vector2(0,0);
-		
-		
-		
-		//TODO add preview parts
 	}
 	
 	public void init_Video(File in, VBox parent_vbox, VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
@@ -165,32 +153,36 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		
 		init_media(media_instance);
 		
-		//TODO create and store mediaView
+        
+        Rectangle prev_rectangle =  add_preview_UI(media_instance);
+		PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
 		
-        Media media; 
-        Rectangle rectangle = new Rectangle();
-        Rectangle prev_rectangle = new Rectangle();
 
+        Rectangle rectangle = add_timeline_UI(media_instance, media_start_label);
+      	parent_vbox.getChildren().add(rectangle);
+      	
+		HBox params = add_layer_parameters(media_instance);
+      	layer_vbox.getChildren().add(params); 
+      	
+      	Media media; 
 		try {
 			media = new Media(in.toURI().toURL().toString());
 			
-			
 			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			
-
-	        
 			MediaView mediaView = new MediaView(mediaPlayer);
 
 	        mediaPlayer.setOnReady(() -> {
+	        	//setting media height and width
 	        	media_instance.preview_height = media.getHeight();
 	        	media_instance.preview_width = media.getWidth();
+	        	//setting media duration
 				media_instance.duration = media.getDuration().toMillis()/Parameters.PPMS;
 				
+				//setting preview image
 				prev_rectangle.setWidth(media_instance.preview_width/2);
 				prev_rectangle.setHeight(media_instance.preview_height/2);
 
 		        rectangle.setWidth(media_instance.duration);
-		        System.out.println(media.getDuration().toMillis());
 
 	        });
 	        
@@ -202,8 +194,19 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 			e.printStackTrace();
 		}
 		
+		 
+        
+		 
 		
+
+		//zoneSelectors(stack_pane);
+	}
+	
+	private Rectangle add_timeline_UI(MediaType media_instance,Label media_start_label) {
 		
+        Rectangle rectangle = new Rectangle();
+
+        
 		//rectangle creation and fill
 		Stop[] stops = new Stop[] { new Stop(0, media_instance.color), new Stop(1, Color.GREY)};
         LinearGradient lg1 = new LinearGradient(0, 0, 2, 1, true, CycleMethod.NO_CYCLE, stops);
@@ -213,10 +216,9 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
         rectangle.setFill(lg1);
         
         
-        prev_rectangle.setFill(media_instance.color);
         
         //rectangle events
-        final Delta dragDelta = new Delta(); 
+        final Vector2 dragDelta = new Vector2(); 
         rectangle.setOnMousePressed(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent mouseEvent) {
 	          // record a delta distance for the drag and drop operation.
@@ -241,8 +243,41 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	        	}
 	        }
 	      });
-        
-        
+		return rectangle;
+	}
+	private Rectangle add_preview_UI(VisualType media_instance) {
+		
+        Rectangle prev_rectangle = new Rectangle();
+
+		
+        final Vector2 dragDelta = new Vector2(); 
+        prev_rectangle.setFill(media_instance.color);
+		
+		prev_rectangle.setOnMousePressed(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent mouseEvent) {
+	          // record a delta distance for the drag and drop operation.
+	          dragDelta.x = prev_rectangle.getTranslateX() - mouseEvent.getSceneX();
+	          dragDelta.y = prev_rectangle.getTranslateY() - mouseEvent.getSceneY();
+	          prev_rectangle.setCursor(Cursor.MOVE);
+	        }
+	      });
+		prev_rectangle.setOnMouseReleased(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent mouseEvent) {
+	        	prev_rectangle.setCursor(Cursor.HAND);
+	        }
+	      });
+		prev_rectangle.setOnMouseDragged(new EventHandler<MouseEvent>() {
+	        public void handle(MouseEvent mouseEvent) {
+	        	prev_rectangle.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
+	            prev_rectangle.setTranslateY(mouseEvent.getSceneY() + dragDelta.y);
+	            
+	            media_instance.preview_position.x = prev_rectangle.getTranslateX()*2;
+	            media_instance.preview_position.y = prev_rectangle.getTranslateY()*2;
+	        }
+	      });
+		return prev_rectangle;
+	}
+	private HBox add_layer_parameters(MediaType media_instance) {
         Label name = new Label(media_instance.name);
         
         //parameters box ( name, icon, color,hidden icon, mute icon )
@@ -284,49 +319,11 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 				}
 			}
 		});
-        
-        
-        
-		 
-		prev_rectangle.setOnMousePressed(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent mouseEvent) {
-	          // record a delta distance for the drag and drop operation.
-	          dragDelta.x = prev_rectangle.getTranslateX() - mouseEvent.getSceneX();
-	          dragDelta.y = prev_rectangle.getTranslateY() - mouseEvent.getSceneY();
-	          prev_rectangle.setCursor(Cursor.MOVE);
-	        }
-	      });
-		prev_rectangle.setOnMouseReleased(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent mouseEvent) {
-	        	prev_rectangle.setCursor(Cursor.HAND);
-	        }
-	      });
-		prev_rectangle.setOnMouseDragged(new EventHandler<MouseEvent>() {
-	        public void handle(MouseEvent mouseEvent) {
-	        	prev_rectangle.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
-	            prev_rectangle.setTranslateY(mouseEvent.getSceneY() + dragDelta.y);
-	            
-	            media_instance.preview_position.x = prev_rectangle.getTranslateX()*2;
-	            media_instance.preview_position.y = prev_rectangle.getTranslateY()*2;
-
-	           
-	        }
-	      });
-        
-        //TODO add preview parts
-		PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
 		
+		if(media_instance instanceof ImageType) muteButton.setDisable(true);
 		
-	      
-		
-		
-		 
-
-      //adding UI elements to timeline grid
-      	parent_vbox.getChildren().add(rectangle);
-      	layer_vbox.getChildren().add(params); 
-
-		//zoneSelectors(stack_pane);
+		return params;
+        
 	}
 	
 
