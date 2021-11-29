@@ -27,6 +27,7 @@ import main.App;
 import model.*;
 import util.Delta;
 import util.String_util;
+import util.Validator;
 import view.Chooser;
 
 public class TimelineController {
@@ -77,6 +78,7 @@ public class TimelineController {
 		 
 		 
 		 vbox.setViewOrder(10);
+
 		 static_stack_pane = stack_pane;
 		 static_scroll_pane = scroll_pane;
 		 static_layer_scroll_pane = layer_scroll_pane;
@@ -102,8 +104,8 @@ public class TimelineController {
 	@FXML
 	public void export() {
 		
-        
-        RenderController.init_render();
+        Validator.startLineCheck();
+        //RenderController.init_render();
         
         //minimize window
         //App.timelineStage.setIconified(true);
@@ -188,7 +190,8 @@ public class TimelineController {
 			}
 		});
 
-		pane.getChildren().add(line);
+
+		pane.getChildren().addAll(line);
 		line.toFront();
 		if ( start_flag) {
 			line.setTranslateX(100);

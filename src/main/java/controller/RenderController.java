@@ -16,6 +16,7 @@ import model.MediaType;
 import model.Media_container;
 import model.Parameters;
 import model.VideoType;
+import util.Validator;
 
 public class RenderController {
 	
