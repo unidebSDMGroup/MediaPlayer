@@ -177,6 +177,8 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	        	media_instance.preview_width = media.getWidth();
 	        	//setting media duration
 				media_instance.duration = media.getDuration().toMillis()/Parameters.PPMS;
+				//setting media end time
+				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * Parameters.PPMS;
 				
 				//setting preview image
 				prev_rectangle.setWidth(media_instance.preview_width/2);
@@ -214,8 +216,8 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
         
         rectangle.setHeight(50);
         rectangle.setFill(lg1);
-        
-        
+
+
         
         //rectangle events
         final Vector2 dragDelta = new Vector2(); 
@@ -239,10 +241,12 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	          //r.setX(mouseEvent.getSceneX() + dragDelta.x);
 	        	rectangle.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
 	        	media_instance.clip_start_time = (float) (mouseEvent.getSceneX() + dragDelta.x) * Parameters.PPMS;
+				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * Parameters.PPMS;
 	            media_start_label.setText(String_util.format_text("media start", (float)(media_instance.clip_start_time/1000), "s"));
 	        	}
 	        }
 	      });
+
 		return rectangle;
 	}
 	private Rectangle add_preview_UI(VisualType media_instance) {
