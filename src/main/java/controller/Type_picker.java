@@ -281,7 +281,7 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	      });
 		return prev_rectangle;
 	}
-	private HBox add_layer_parameters(MediaType media_instance) {
+	 HBox add_layer_parameters(MediaType media_instance) {
         Label name = new Label(media_instance.name);
         
         //parameters box ( name, icon, color,hidden icon, mute icon )

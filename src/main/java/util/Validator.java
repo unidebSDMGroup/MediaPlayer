@@ -12,7 +12,8 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Validator {
 
-    public static void startLineCheck(){
+    public static boolean startLineCheck(){
+    	
         for(MediaType mt :Media_container.media_collection) {
             if (mt instanceof VideoType) {
                 System.out.println( mt.clip_end_time);
@@ -23,14 +24,15 @@ public class Validator {
                     alert.setHeaderText("Render issue");
                     alert.setContentText("The Start line or finish line does not align with all videos");
 
-                    alert.showAndWait();
-                    break;
+                    alert.showAndWait(); 
+                    return false;
                 } else {
-                    RenderController.init_render();
-
+                    return true;
                 }
             }
         }
+        
+        return true;
 
     }
 }

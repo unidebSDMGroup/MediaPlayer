@@ -104,8 +104,10 @@ public class TimelineController {
 	@FXML
 	public void export() {
 		
-        Validator.startLineCheck();
-        //RenderController.init_render();
+		
+        if ( Validator.startLineCheck() ) {
+            RenderController.init_render();
+        }
         
         //minimize window
         //App.timelineStage.setIconified(true);
