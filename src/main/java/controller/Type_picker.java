@@ -59,7 +59,7 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		
 		case "mp4" : init_Video(in,vbox_parent,layer_vbox,stack_pane,media_start_label); break;
 		case "jpg" : init_Image(in,vbox_parent,layer_vbox,stack_pane,media_start_label); break;
-		case "mp3" : init_Audio(in,stack_pane); break;
+		case "mp3" : init_Audio(in,vbox_parent,layer_vbox,stack_pane,media_start_label); break;
 		default:
 			break;
 		}
@@ -333,9 +333,53 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 
 
 
-	public void init_Audio(File in, AnchorPane stack_pane) {
+	public void init_Audio(File in, VBox parent_vbox, VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
 		 //TODO create audio
 		//zoneSelectors(stack_pane);
+
+		AudioType media_instance = new AudioType();
+
+		init_media(media_instance);
+
+
+		Rectangle rectangle = add_timeline_UI(media_instance, media_start_label);
+		parent_vbox.getChildren().add(rectangle);
+
+		HBox params = add_layer_parameters(media_instance);
+		layer_vbox.getChildren().add(params);
+
+		Media media;
+		try {
+			media = new Media(in.toURI().toURL().toString());
+
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			MediaView mediaView = new MediaView(mediaPlayer);
+
+			mediaPlayer.setOnReady(() -> {
+				//setting media duration
+				media_instance.duration = media.getDuration().toMillis()/Parameters.PPMS;
+				//setting media end time
+				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * Parameters.PPMS;
+
+
+				rectangle.setWidth(media_instance.duration);
+
+			});
+			media_instance.audio = mediaView;
+
+
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+
+
+
+
+
+		//zoneSelectors(stack_pane);
+	}
 	}
 	 
-}
+

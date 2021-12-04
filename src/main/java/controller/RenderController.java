@@ -11,11 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import main.App;
-import model.ImageType;
-import model.MediaType;
-import model.Media_container;
-import model.Parameters;
-import model.VideoType;
+import model.*;
 import util.Validator;
 
 public class RenderController {
@@ -46,7 +42,8 @@ public class RenderController {
 			if (mt instanceof ImageType) {
 				
 				//TODO image render
-				System.out.println("image");
+				//System.out.println("image");
+				render_image((ImageType) mt);
 			}
 			//a video
 			else if(mt instanceof VideoType) {
@@ -55,7 +52,8 @@ public class RenderController {
 			// an audio
 			else {
 				//TODO play audio
-				System.out.println("audio");
+				//System.out.println("audio");
+				render_audio((AudioType)mt);
 			}
 		}
 	}
@@ -71,11 +69,42 @@ public class RenderController {
 		vt.video.setFitWidth(vt.preview_width);
 		vt.video.getMediaPlayer().seek(new Duration(Parameters.timeline_region_start_time-vt.clip_start_time));
 		vt.video.getMediaPlayer().setStopTime(new Duration(Parameters.timeline_region_end_time-vt.clip_start_time));
+		if(vt.muted == true){
+			vt.video.getMediaPlayer().setMute(true);
+		}else if(vt.muted == false){
+			vt.video.getMediaPlayer().setMute(false);
+
+		}
 		
 		static_pane.getChildren().add(vt.video);
 		
 
 		
+	}
+	public static void render_image(ImageType it){
+
+		 it.image_view.setX(it.preview_position.x);
+		 it.image_view.setY(it.preview_position.y);
+		 it.image_view.setFitHeight(it.preview_height);
+		 it.image_view.setFitWidth(it.preview_width);
+
+		static_pane.getChildren().add(it.image_view);
+
+	}
+
+	public static void render_audio(AudioType at){
+
+		at.audio.getMediaPlayer().play();
+		at.audio.getMediaPlayer().seek(new Duration(Parameters.timeline_region_start_time-at.clip_start_time));
+		at.audio.getMediaPlayer().setStopTime(new Duration(Parameters.timeline_region_end_time-at.clip_start_time));
+		if(at.muted == true){
+			at.audio.getMediaPlayer().setMute(true);
+		}else if(at.muted == false){
+			at.audio.getMediaPlayer().setMute(false);
+
+		}
+		static_pane.getChildren().add(at.audio);
+
 	}
 	
 }
