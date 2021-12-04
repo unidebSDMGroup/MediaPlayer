@@ -14,8 +14,8 @@ public class Validator {
             if (mt instanceof VideoType || mt instanceof AudioType) {
 
                 if (Parameters.timeline_region_start_time - mt.clip_start_time < 0 || Parameters.timeline_region_end_time > mt.clip_end_time) {
-
                     lineIntersecting = true;
+                    break;
                 } else {
                     lineIntersecting = false;
 
