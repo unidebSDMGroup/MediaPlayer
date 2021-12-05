@@ -1,5 +1,6 @@
 package model;
 
+import javafx.scene.shape.Rectangle;
 import util.Vector2;
 
 public abstract class VisualType extends MediaType {
@@ -8,7 +9,7 @@ public abstract class VisualType extends MediaType {
 	public float preview_width;
 	public float preview_height;
 	
-	
+	public Rectangle drag_rect;
 	
 	
 

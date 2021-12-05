@@ -75,7 +75,6 @@ class LayerTest {
 			e.printStackTrace();
 		}
 		
-		System.out.println(((HBox)layer_vbox.getChildren().get(0)).getChildren());
 		
    	 b = (Button)((HBox)layer_vbox.getChildren().get(0)).getChildren().get(1);
    	 l = (Label)((HBox)layer_vbox.getChildren().get(0)).getChildren().get(0);
