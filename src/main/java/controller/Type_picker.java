@@ -111,63 +111,12 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
         
 		 Rectangle prev_rectangle =  add_preview_UI(media_instance);
 		 
-		 Rectangle drag_rect = new Rectangle();
-	        drag_rect.setWidth(20);
-	        drag_rect.setHeight(20);
-	        drag_rect.setFill(Color.WHITE);
-	        
-	        System.out.println(prev_rectangle.getWidth());
-	        
-	        drag_rect.setX(prev_rectangle.getWidth());
-	        drag_rect.setY(prev_rectangle.getHeight());
-
-	        
-	        final Vector2 dragDelta = new Vector2(); 
-	        final Vector2 oldDelta = new Vector2(); 
-
-	        
-
-	        drag_rect.setOnMousePressed(new EventHandler<MouseEvent>() {
-		        public void handle(MouseEvent mouseEvent) {
-		          // record a delta distance for the drag and drop operation.
-		          drag_rect.setCursor(Cursor.MOVE);
-		        	oldDelta.x = mouseEvent.getSceneX() ;
-
-		        }
-		      });
-	        drag_rect.setOnMouseReleased(new EventHandler<MouseEvent>() {
-		        public void handle(MouseEvent mouseEvent) {
-		        	drag_rect.setCursor(Cursor.HAND);
-		        	
-		        	media_instance.preview_width = (float) prev_rectangle.getWidth() * 2;
-		        	media_instance.preview_height = (float) prev_rectangle.getHeight() * 2;
-
-		        }
-		      });
-			
-	        drag_rect.setOnMouseDragged(new EventHandler<MouseEvent>() {
-		        public void handle(MouseEvent mouseEvent) {
-		        	
-		        	dragDelta.x = mouseEvent.getSceneX() - oldDelta.x;
-		        	
-		        	oldDelta.x = mouseEvent.getSceneX();
-
-
-		        	prev_rectangle.setWidth(prev_rectangle.getWidth() + dragDelta.x);
-		        	prev_rectangle.setHeight(prev_rectangle.getWidth()+ dragDelta.x);
-		        	
-		        	drag_rect.setX(prev_rectangle.getTranslateX()+prev_rectangle.getWidth());
-		            drag_rect.setY(prev_rectangle.getTranslateY()+prev_rectangle.getHeight());
-		        	
-		        }
-		      });
-			
-	        media_instance.drag_rect = drag_rect;
-	        
-		    //DragResizer.makeResizable(prev_rectangle);
+		 Rectangle drag_rect = add_resize_rect(media_instance,prev_rectangle);
 		 
-			PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
+	        
 	        PreviewController.static_prev_pane.getChildren().add(drag_rect);
+
+			PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
 
 
 	        Rectangle rectangle = add_timeline_UI(media_instance, media_start_label);
@@ -193,12 +142,81 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		    	
 		    	prev_rectangle.setWidth(image.getHeight()/2);
 				prev_rectangle.setHeight(image.getWidth()/2);
+				
+				drag_rect.setX(prev_rectangle.getTranslateX()+prev_rectangle.getWidth());
+	            drag_rect.setY(prev_rectangle.getTranslateY()+prev_rectangle.getHeight());
+				
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	private Rectangle add_resize_rect(VisualType media_instance , Rectangle prev_rectangle) {
+		 Rectangle drag_rect = new Rectangle();
+	        drag_rect.setWidth(20);
+	        drag_rect.setHeight(20);
+	        drag_rect.setFill(Color.WHITE);
+	        
+	        
+	        drag_rect.setX(prev_rectangle.getWidth());
+	        drag_rect.setY(prev_rectangle.getHeight());
+
+	        
+	        final Vector2 dragDelta = new Vector2(); 
+	        final Vector2 oldDelta = new Vector2(); 
+
+	        
+
+	        drag_rect.setOnMousePressed(new EventHandler<MouseEvent>() {
+		        public void handle(MouseEvent mouseEvent) {
+		          // record a delta distance for the drag and drop operation.
+		          drag_rect.setCursor(Cursor.NW_RESIZE);
+		        	oldDelta.x = mouseEvent.getSceneX() ;
+
+		        }
+		      });
+	        drag_rect.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		        public void handle(MouseEvent mouseEvent) {
+		        	drag_rect.setCursor(Cursor.DEFAULT);
+		        	
+		        	media_instance.preview_width = (float) prev_rectangle.getWidth() * 2;
+		        	media_instance.preview_height = (float) prev_rectangle.getHeight() * 2;
+
+		        }
+		      });
+	        
+	        drag_rect.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		        public void handle(MouseEvent mouseEvent) {
+		        	drag_rect.setCursor(Cursor.NW_RESIZE);
+		        	
+
+		        }
+		      });
+			
+	        drag_rect.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		        public void handle(MouseEvent mouseEvent) {
+		        	
+		        	dragDelta.x = mouseEvent.getSceneX() - oldDelta.x;
+		        	
+		        	oldDelta.x = mouseEvent.getSceneX();
+
+
+		        	prev_rectangle.setWidth(prev_rectangle.getWidth() + dragDelta.x);
+		        	prev_rectangle.setHeight(prev_rectangle.getWidth()+ dragDelta.x);
+		        	
+		        	drag_rect.setX(prev_rectangle.getTranslateX()+prev_rectangle.getWidth());
+		            drag_rect.setY(prev_rectangle.getTranslateY()+prev_rectangle.getHeight());
+		        	
+		        }
+		      });
+			
+	        media_instance.drag_rect = drag_rect;
+	        
+	        return drag_rect;
+	}
+
+
 	public void init_Video(File in, VBox parent_vbox, VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
 
 		VideoType media_instance = new VideoType();
@@ -207,6 +225,12 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		
         
         Rectangle prev_rectangle =  add_preview_UI(media_instance);
+        
+        Rectangle drag_rect = add_resize_rect(media_instance,prev_rectangle);
+        
+        PreviewController.static_prev_pane.getChildren().add(drag_rect);
+        
+        
 		PreviewController.static_prev_pane.getChildren().add(prev_rectangle);
 		
 
@@ -235,6 +259,9 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 				//setting preview image
 				prev_rectangle.setWidth(media_instance.preview_width/2);
 				prev_rectangle.setHeight(media_instance.preview_height/2);
+				
+				drag_rect.setX(prev_rectangle.getTranslateX()+prev_rectangle.getWidth());
+	            drag_rect.setY(prev_rectangle.getTranslateY()+prev_rectangle.getHeight());
 
 		        rectangle.setWidth(media_instance.duration);
 
