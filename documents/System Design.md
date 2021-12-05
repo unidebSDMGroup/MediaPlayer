@@ -20,7 +20,7 @@ At the very basic functional level the product should deliver the following core
 //should incluide a project timeline
 
 
-## III . Extensive Theoretical Feature List.
+## III . Theoretical Feature List.
 
 ### 1 - General Features.
 
@@ -122,8 +122,14 @@ Hierarchy of the application loop:
 
 Note: This is based on how it functions currently and is not extensive.
 
+## V. UML Class Diagram
+
+![back](/resources/images/UML_Class_Diagram.png)
+
 
 ## VIII . Testing Plan
+
+
 
 ## IX . Deployment Plan
 
