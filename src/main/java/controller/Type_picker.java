@@ -33,7 +33,7 @@ import model.Color_table;
 import model.ImageType;
 import model.MediaType;
 import model.Media_container;
-import model.Parameters;
+import model.AppParameters;
 import model.VideoType;
 import model.VisualType;
 import util.Delta;
@@ -173,6 +173,8 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		          // record a delta distance for the drag and drop operation.
 		          drag_rect.setCursor(Cursor.NW_RESIZE);
 		        	oldDelta.x = mouseEvent.getSceneX() ;
+		        	
+		        	AppParameters.block_camera_mouvement_flag = true;
 
 		        }
 		      });
@@ -182,7 +184,8 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		        	
 		        	media_instance.preview_width = (float) prev_rectangle.getWidth() * 2;
 		        	media_instance.preview_height = (float) prev_rectangle.getHeight() * 2;
-
+		        	
+		        	AppParameters.block_camera_mouvement_flag = false;
 		        }
 		      });
 	        
@@ -252,9 +255,9 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	        	media_instance.preview_height = media.getHeight();
 	        	media_instance.preview_width = media.getWidth();
 	        	//setting media duration
-				media_instance.duration = media.getDuration().toMillis()/Parameters.PPMS;
+				media_instance.duration = media.getDuration().toMillis()/AppParameters.PPMS;
 				//setting media end time
-				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * Parameters.PPMS;
+				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * AppParameters.PPMS;
 				
 				//setting preview image
 				prev_rectangle.setWidth(media_instance.preview_width/2);
@@ -321,8 +324,8 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	        		
 	        	
 	        	rectangle.setTranslateX(mouseEvent.getSceneX() + dragDelta.x);
-	        	media_instance.clip_start_time = (float) (mouseEvent.getSceneX() + dragDelta.x) * Parameters.PPMS;
-				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * Parameters.PPMS;
+	        	media_instance.clip_start_time = (float) (mouseEvent.getSceneX() + dragDelta.x) * AppParameters.PPMS;
+				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * AppParameters.PPMS;
 	            media_start_label.setText(String_util.format_text("media start", (float)(media_instance.clip_start_time/1000), "s"));
 	        	}
 	        }
@@ -345,11 +348,15 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	          dragDelta.x = prev_rectangle.getTranslateX() - mouseEvent.getSceneX();
 	          dragDelta.y = prev_rectangle.getTranslateY() - mouseEvent.getSceneY();
 	          prev_rectangle.setCursor(Cursor.MOVE);
+	          
+	          AppParameters.block_camera_mouvement_flag = true;
 	        }
 	      });
 		prev_rectangle.setOnMouseReleased(new EventHandler<MouseEvent>() {
 	        public void handle(MouseEvent mouseEvent) {
 	        	prev_rectangle.setCursor(Cursor.HAND);
+	        	
+	        	AppParameters.block_camera_mouvement_flag = false;
 	        }
 	      });
 		
@@ -363,6 +370,7 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	            media_instance.preview_position.y = prev_rectangle.getTranslateY()*2;
 	            media_instance.drag_rect.setX(prev_rectangle.getTranslateX()+prev_rectangle.getWidth());
 	            media_instance.drag_rect.setY(prev_rectangle.getTranslateY()+prev_rectangle.getHeight());
+	            
 	            
 	            
 
@@ -446,9 +454,9 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 
 			mediaPlayer.setOnReady(() -> {
 				//setting media duration
-				media_instance.duration = media.getDuration().toMillis()/Parameters.PPMS;
+				media_instance.duration = media.getDuration().toMillis()/AppParameters.PPMS;
 				//setting media end time
-				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * Parameters.PPMS;
+				media_instance.clip_end_time = (float) (media_instance.clip_start_time + media_instance.duration) * AppParameters.PPMS;
 
 
 				rectangle.setWidth(media_instance.duration);

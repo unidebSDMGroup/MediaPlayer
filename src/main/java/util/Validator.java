@@ -14,7 +14,7 @@ public class Validator {
         for(MediaType mt :Media_container.media_collection) {
             if (mt instanceof VideoType || mt instanceof AudioType) {
 
-                if (Parameters.timeline_region_start_time - mt.clip_start_time < 0 || Parameters.timeline_region_end_time > mt.clip_end_time) {
+                if (AppParameters.timeline_region_start_time - mt.clip_start_time < 0 || AppParameters.timeline_region_end_time > mt.clip_end_time) {
                     lineIntersecting = true;
                     break;
                 } else {

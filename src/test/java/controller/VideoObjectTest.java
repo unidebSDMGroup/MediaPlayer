@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 import model.Color_table;
 import model.MediaType;
 import model.Media_container;
-import model.Parameters;
+import model.AppParameters;
 import model.VideoType;
 import model.VisualType;
 
@@ -81,7 +81,7 @@ class VideoObjectTest {
     @Test
     void test_duration() {
     	VideoType vt = (VideoType) Media_container.media_collection.get(0); 
-    	assertEquals((int)(vt.duration * Parameters.PPMS), (int)(vt.clip_end_time - vt.clip_start_time) );
+    	assertEquals((int)(vt.duration * AppParameters.PPMS), (int)(vt.clip_end_time - vt.clip_start_time) );
     }  
     
     @Test

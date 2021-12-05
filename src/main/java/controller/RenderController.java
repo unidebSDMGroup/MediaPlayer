@@ -67,8 +67,8 @@ public class RenderController {
 		vt.video.setY(vt.preview_position.y);
 		vt.video.setFitHeight(vt.preview_height);
 		vt.video.setFitWidth(vt.preview_width);
-		vt.video.getMediaPlayer().seek(new Duration(Parameters.timeline_region_start_time-vt.clip_start_time));
-		vt.video.getMediaPlayer().setStopTime(new Duration(Parameters.timeline_region_end_time-vt.clip_start_time));
+		vt.video.getMediaPlayer().seek(new Duration(AppParameters.timeline_region_start_time-vt.clip_start_time));
+		vt.video.getMediaPlayer().setStopTime(new Duration(AppParameters.timeline_region_end_time-vt.clip_start_time));
 		if(vt.muted == true){
 			vt.video.getMediaPlayer().setMute(true);
 		}else if(vt.muted == false){
@@ -95,8 +95,8 @@ public class RenderController {
 	public static void render_audio(AudioType at){
 
 		at.audio.getMediaPlayer().play();
-		at.audio.getMediaPlayer().seek(new Duration(Parameters.timeline_region_start_time-at.clip_start_time));
-		at.audio.getMediaPlayer().setStopTime(new Duration(Parameters.timeline_region_end_time-at.clip_start_time));
+		at.audio.getMediaPlayer().seek(new Duration(AppParameters.timeline_region_start_time-at.clip_start_time));
+		at.audio.getMediaPlayer().setStopTime(new Duration(AppParameters.timeline_region_end_time-at.clip_start_time));
 		if(at.muted == true){
 			at.audio.getMediaPlayer().setMute(true);
 		}else if(at.muted == false){

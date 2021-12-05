@@ -164,10 +164,10 @@ public class TimelineController {
 		line.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent mouseEvent) {
 
-				start_cond.set((mouseEvent.getSceneX() + dragDelta.x <= (Parameters.timeline_region_end_time/Parameters.PPMS) - offset)
+				start_cond.set((mouseEvent.getSceneX() + dragDelta.x <= (AppParameters.timeline_region_end_time/AppParameters.PPMS) - offset)
 						&& (mouseEvent.getSceneX() + dragDelta.x >= edge_limit));
 
-				end_cond.set((mouseEvent.getSceneX() + dragDelta.x >= (Parameters.timeline_region_start_time/Parameters.PPMS) + offset)
+				end_cond.set((mouseEvent.getSceneX() + dragDelta.x >= (AppParameters.timeline_region_start_time/AppParameters.PPMS) + offset)
 						&& (mouseEvent.getSceneX() + dragDelta.x < edge_limit));
 
 				if (start_flag ? start_cond.get() : end_cond.get()) {
@@ -177,13 +177,13 @@ public class TimelineController {
 				}
 
 				if ( start_flag ) {
-					Parameters.timeline_region_start_time = (float) line.getTranslateX() * Parameters.PPMS;
-					start_label.setText(String_util.format_text("start mark",Parameters.timeline_region_start_time /1000, "s"));
+					AppParameters.timeline_region_start_time = (float) line.getTranslateX() * AppParameters.PPMS;
+					start_label.setText(String_util.format_text("start mark",AppParameters.timeline_region_start_time /1000, "s"));
 
 				}
 				else {
-					Parameters.timeline_region_end_time = (float) line.getTranslateX() * Parameters.PPMS;
-					end_label.setText(String_util.format_text("end mark",Parameters.timeline_region_end_time/1000, "s"));
+					AppParameters.timeline_region_end_time = (float) line.getTranslateX() * AppParameters.PPMS;
+					end_label.setText(String_util.format_text("end mark",AppParameters.timeline_region_end_time/1000, "s"));
 
 				}
 				
@@ -197,15 +197,15 @@ public class TimelineController {
 		line.toFront();
 		if ( start_flag) {
 			line.setTranslateX(100);
-			Parameters.timeline_region_start_time = 100 * Parameters.PPMS ;
+			AppParameters.timeline_region_start_time = 100 * AppParameters.PPMS ;
 		}
 		else {
 			line.setTranslateX(150);
-			Parameters.timeline_region_end_time = 150 * Parameters.PPMS ;
+			AppParameters.timeline_region_end_time = 150 * AppParameters.PPMS ;
 		}
 	
-		start_label.setText(String_util.format_text("start mark",Parameters.timeline_region_start_time/1000, "s"));
-		end_label.setText(String_util.format_text("end mark",Parameters.timeline_region_end_time /1000, "s"));
+		start_label.setText(String_util.format_text("start mark",AppParameters.timeline_region_start_time/1000, "s"));
+		end_label.setText(String_util.format_text("end mark",AppParameters.timeline_region_end_time /1000, "s"));
 
 	}
 	//zone selectors generation

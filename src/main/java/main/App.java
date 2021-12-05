@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.AppParameters;
 import model.Color_table;
 import util.Vector2;
 import view.Global_elements;
@@ -76,6 +77,8 @@ public class App extends Application{
 		          dragDelta.y = c.getTranslateX() - mouseEvent.getSceneY();
 		        }
 		      });
+			  
+			  
 			  previewScene.setOnMouseReleased(new EventHandler<MouseEvent>() {
 		        public void handle(MouseEvent mouseEvent) { 
 		        }
@@ -83,7 +86,7 @@ public class App extends Application{
 			  previewScene.setOnMouseDragged(new EventHandler<MouseEvent>() {
 		        public void handle(MouseEvent mouseEvent) {
 		           
-		          if (!held.get()) { 
+		          if (!held.get() && !AppParameters.block_camera_mouvement_flag) { 
 		        	  c.setTranslateX( - (mouseEvent.getSceneX() + dragDelta.x));
 		        	  c.setTranslateY( - (mouseEvent.getSceneY() + dragDelta.y));
 		          } 

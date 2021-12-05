@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 import model.Color_table;
 import model.MediaType;
 import model.Media_container;
-import model.Parameters;
+import model.AppParameters;
 import model.VideoType;
 import model.VisualType;
 import view.Global_elements;
