@@ -33,6 +33,8 @@ public class PreviewController {
 
 		//uwu
 		static_prev_pane = prev_pane;
+		static_prev_pane.setMaxWidth(Double.MAX_VALUE);
+		static_prev_pane.setMaxHeight(Double.MAX_VALUE);
 	}
 
 	@FXML

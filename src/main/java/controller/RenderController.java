@@ -149,7 +149,7 @@ public class RenderController {
 
 	@FXML
 	private void close(MouseEvent event) {
-		App.renderStage.hide();
+		App.renderStage.close();
 		App.previewStage.show();
 		App.timelineStage.show();
 	}
