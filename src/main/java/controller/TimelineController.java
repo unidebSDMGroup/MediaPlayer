@@ -11,10 +11,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -31,13 +29,22 @@ import util.Validator;
 import view.Chooser;
 
 public class TimelineController {
-	
+
 	private Stage stage;
 	private Type_picker picker = new Type_picker();
 	private Chooser chooser = new Chooser();
 	public boolean zoneGenerated = false;
 
-	 
+	@FXML
+	public Button maximize_button;
+
+	@FXML
+	public Button minimize_button;
+
+
+	@FXML
+	public Button close_button;
+
 	@FXML
 	public Label start_label;
 	@FXML
@@ -46,102 +53,100 @@ public class TimelineController {
 	public Label media_start_label;
 
 	@FXML
-	 public Button import_button;
+	public Button import_button;
 	@FXML
-	 public Button export_button;
+	public Button export_button;
 	@FXML
 	public VBox vbox;
 	@FXML
 	public AnchorPane stack_pane;
-	
+
 	@FXML
 	public ScrollPane scroll_pane;
 	@FXML
 	public ScrollPane layer_scroll_pane;
 	@FXML
 	public VBox layer_vbox;
-	
+
 	public static ScrollPane static_scroll_pane;
 	public static ScrollPane static_layer_scroll_pane;
+	double x,y;
 
-	
-	
+
 	public static AnchorPane static_stack_pane;
-	
-	
-	 @FXML
-	    public void initialize() {
 
 
-		 layer_scroll_pane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
-		 layer_scroll_pane.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
-		 
-		 
-		 vbox.setViewOrder(10);
+	@FXML
+	public void initialize() {
 
-		 static_stack_pane = stack_pane;
-		 static_scroll_pane = scroll_pane;
-		 static_layer_scroll_pane = layer_scroll_pane;
-		 
-		 media_start_label.setText(String_util.default_media_text);
 
-	
-	
-		 //vbox.setAlignment(Pos.CENTER_RIGHT);
-		 zoneSelectors(stack_pane);
+		layer_scroll_pane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
+		layer_scroll_pane.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
 
-	    }
-	
+
+		vbox.setViewOrder(10);
+
+		static_stack_pane = stack_pane;
+		static_scroll_pane = scroll_pane;
+		static_layer_scroll_pane = layer_scroll_pane;
+
+		media_start_label.setText(String_util.default_media_text);
+
+
+		//vbox.setAlignment(Pos.CENTER_RIGHT);
+		zoneSelectors(stack_pane);
+
+	}
+
 	@FXML
 	public void import_file() {
-		
-		
-		
-        picker.getFile( chooser.fileChooser.showOpenDialog(stage),vbox,layer_vbox,stack_pane,media_start_label);
+
+
+		picker.getFile(chooser.fileChooser.showOpenDialog(stage), vbox, layer_vbox, stack_pane, media_start_label);
 
 	}
-	 
+
 	@FXML
 	public void export() {
-		
-		
-        if ( Validator.startLineCheck() ) {
-            RenderController.init_render();
-        }
-        
-        //minimize window
-        //App.timelineStage.setIconified(true);
-        
-        //exits app
-        //Platform.exit();
+
+
+		if (Validator.startLineCheck()) {
+			RenderController.init_render();
+		}
+
+		//minimize window
+		//App.timelineStage.setIconified(true);
+
+		//exits app
+		//Platform.exit();
 
 	}
-	
-	
+
 
 	@FXML
-	 public void import_select() {
+	public void import_select() {
 		import_button.setText("...");
-	 }
-	
+	}
+
 	@FXML
-	 public void import_unselect() {
+	public void import_unselect() {
 		import_button.setText("Import");
-	 }
-	
+	}
+
 	@FXML
-	 public void export_select() {
+	public void export_select() {
 		export_button.setText("...");
-	 }
-	
+	}
+
 	@FXML
-	 public void export_unselect() {
+	public void export_unselect() {
 		export_button.setText("Export");
-	 }
-	public void create_line(AnchorPane pane,int height,int offset,int edge_limit,boolean start_flag) {
+	}
+
+	public void create_line(AnchorPane pane, int height, int offset, int edge_limit, boolean start_flag) {
 
 		Rectangle line = new Rectangle(0, 5, 5, height);
-		if ( start_flag ) line.setFill(Color.RED);
+		if (start_flag) line.setFill(Color.RED);
 		else line.setFill(Color.BLUE);
 
 		//FIXME change delta to vector2
@@ -164,10 +169,10 @@ public class TimelineController {
 		line.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent mouseEvent) {
 
-				start_cond.set((mouseEvent.getSceneX() + dragDelta.x <= (AppParameters.timeline_region_end_time/AppParameters.PPMS) - offset)
+				start_cond.set((mouseEvent.getSceneX() + dragDelta.x <= (AppParameters.timeline_region_end_time / AppParameters.PPMS) - offset)
 						&& (mouseEvent.getSceneX() + dragDelta.x >= edge_limit));
 
-				end_cond.set((mouseEvent.getSceneX() + dragDelta.x >= (AppParameters.timeline_region_start_time/AppParameters.PPMS) + offset)
+				end_cond.set((mouseEvent.getSceneX() + dragDelta.x >= (AppParameters.timeline_region_start_time / AppParameters.PPMS) + offset)
 						&& (mouseEvent.getSceneX() + dragDelta.x < edge_limit));
 
 				if (start_flag ? start_cond.get() : end_cond.get()) {
@@ -176,42 +181,40 @@ public class TimelineController {
 
 				}
 
-				if ( start_flag ) {
+				if (start_flag) {
 					AppParameters.timeline_region_start_time = (float) line.getTranslateX() * AppParameters.PPMS;
-					start_label.setText(String_util.format_text("start mark",AppParameters.timeline_region_start_time /1000, "s"));
+					start_label.setText(String_util.format_text("start mark", AppParameters.timeline_region_start_time / 1000, "s"));
 
-				}
-				else {
+				} else {
 					AppParameters.timeline_region_end_time = (float) line.getTranslateX() * AppParameters.PPMS;
-					end_label.setText(String_util.format_text("end mark",AppParameters.timeline_region_end_time/1000, "s"));
+					end_label.setText(String_util.format_text("end mark", AppParameters.timeline_region_end_time / 1000, "s"));
 
 				}
-				
-				
-				
+
+
 			}
 		});
 
 
 		pane.getChildren().addAll(line);
 		line.toFront();
-		if ( start_flag) {
+		if (start_flag) {
 			line.setTranslateX(100);
-			AppParameters.timeline_region_start_time = 100 * AppParameters.PPMS ;
-		}
-		else {
+			AppParameters.timeline_region_start_time = 100 * AppParameters.PPMS;
+		} else {
 			line.setTranslateX(150);
-			AppParameters.timeline_region_end_time = 150 * AppParameters.PPMS ;
+			AppParameters.timeline_region_end_time = 150 * AppParameters.PPMS;
 		}
-	
-		start_label.setText(String_util.format_text("start mark",AppParameters.timeline_region_start_time/1000, "s"));
-		end_label.setText(String_util.format_text("end mark",AppParameters.timeline_region_end_time /1000, "s"));
+
+		start_label.setText(String_util.format_text("start mark", AppParameters.timeline_region_start_time / 1000, "s"));
+		end_label.setText(String_util.format_text("end mark", AppParameters.timeline_region_end_time / 1000, "s"));
 
 	}
-	//zone selectors generation
-	public void zoneSelectors(AnchorPane pane){
 
-		if(!zoneGenerated) {
+	//zone selectors generation
+	public void zoneSelectors(AnchorPane pane) {
+
+		if (!zoneGenerated) {
 
 			//start line
 			int height = 250;
@@ -227,7 +230,47 @@ public class TimelineController {
 		}
 
 	}
-	
-	
-	
+
+	@FXML
+	private void max(MouseEvent event) {
+		if (App.timelineStage.isMaximized()) {
+			App.timelineStage.setMaximized(false);
+			App.timelineStage.setFullScreen(false);
+		} else {
+			App.timelineStage.setFullScreen(true);
+			App.timelineStage.setMaximized(true);
+		}
+	}
+
+	@FXML
+	private void close(MouseEvent event) {
+		Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+		a.setContentText("Do you want to exit?");
+		a.showAndWait();
+
+		if (a.getResult() == ButtonType.OK) {
+			//App.timelineStage.close();
+			//App.previewStage.close();
+			Platform.exit();
+
+		}
+
+	}
+	@FXML
+	private void min(MouseEvent event) {
+		App.timelineStage.setIconified(true);
+
+	}
+
+	@FXML
+	void pressed(MouseEvent event){
+		x = event.getSceneX();
+		y = event.getSceneY();
+	}
+	@FXML
+	void dragged(MouseEvent event){
+		App.timelineStage.setY(event.getScreenY() - y);
+		App.timelineStage.setX(event.getScreenX() - x);
+
+	}
 }

@@ -1,0 +1,31 @@
+*{
+    -fx-base: black
+}
+
+.maximize_button{
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+    -fx-background-radius: 3;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.minimize_button{
+    -fx-background-color: 
+        linear-gradient(#ffd65b, #e68400),
+        linear-gradient(#ffef84, #f2ba44),
+        linear-gradient(#ffea6a, #efaa22),
+        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%);
+        -fx-background-radius: 3;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+
+}
+
+.close_button{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 3;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
