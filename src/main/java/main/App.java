@@ -175,9 +175,8 @@ public class App extends Application{
 	   * @param position x positions for grid lines
 	   */
 	  public void create_line(int position) {
-			 Line line = new Line(0, 0, 0, 250);
+			 Line line = new Line(0, 0, 0, 400);
 			 line.setStroke(Color.GREY);
-			
 	         line.setStrokeWidth(1);
 	         
 	         TimelineController.static_stack_pane.getChildren().add(line);

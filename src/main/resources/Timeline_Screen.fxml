@@ -16,14 +16,14 @@
          <content>
             <AnchorPane fx:id="stack_pane" prefHeight="237.0" prefWidth="566.0">
                <children>
-                  <VBox fx:id="vbox" prefHeight="234.0" prefWidth="561.0" />
+                  <VBox fx:id="vbox" prefHeight="400.0" prefWidth="561.0" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
       <ScrollPane fx:id="layer_scroll_pane" layoutX="14.0" layoutY="47.0" prefHeight="240.0" prefWidth="184.0" style="-fx-background: #282828;">
          <content>
-            <VBox fx:id="layer_vbox" prefHeight="236.0" prefWidth="181.0" />
+            <VBox fx:id="layer_vbox" prefHeight="400.0" prefWidth="181.0" />
          </content>
       </ScrollPane>
       <Label fx:id="end_label" layoutX="479.0" layoutY="328.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="end" />

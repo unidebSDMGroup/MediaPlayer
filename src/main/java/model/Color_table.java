@@ -24,6 +24,8 @@ public class Color_table {
 		colors.put(Color.MAGENTA, false);
 		colors.put(Color.BROWN, false);
 		colors.put(Color.BEIGE, false);
+		colors.put(Color.TEAL, false);
+		colors.put(Color.ORANGE, false);
 
 	}
 	

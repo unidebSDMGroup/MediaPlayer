@@ -251,7 +251,7 @@ public class TimelineController {
 		if(!zoneGenerated) {
 
 			//start line
-			int height = 250;
+			int height = 400;
 			int startxlimit = 0;
 			int finishxlimit = 1000;
 

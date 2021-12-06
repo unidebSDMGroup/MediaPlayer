@@ -8,8 +8,10 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import main.App;
 import model.*;
@@ -29,6 +31,23 @@ public class RenderController {
 		App.previewStage.show();
 		App.timelineStage.show();
         App.renderStage.hide();
+        
+        
+
+        for (int i = 2; i < render_pane.getChildren().size() ; i++) {
+        	 
+
+        	if ( render_pane.getChildren().get(i) instanceof MediaView) {
+        		((MediaView) render_pane.getChildren().get(i)).getMediaPlayer().stop();
+        	}
+        	render_pane.getChildren().remove(i);
+        	
+
+        }
+        
+        
+        for (Node n : render_pane.getChildren())
+        System.out.println(n);
         
 	}
 	
