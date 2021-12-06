@@ -4,14 +4,14 @@
 
 At the very basic functional level the product should deliver the following core functionalities.
 
-- Working application in a windows enviroment.
+- Working application in a windows environment.
 - Import multiple videos/images/audio from files with preset file types.
-- Allow editing of size,timeline location of imported media elements.
+- Allow editing of size, timeline location of imported media elements.
 - Export the combined video into a video file.
 
-## II . Timeline.
+## II . Project Phases.
 
-// 2 weeks each stage / phase
+The timeline was formulated based on the SCRUM model with each sprint lasting approximately 3 weeks.
 
 | Sprint     | Development Period |
 | ----------- | -----------|
@@ -83,10 +83,6 @@ Import Export Buttons:
 
 	- Buttons part of the scene but not attached to mediaObject.
 
-### 3 . Other Funcitonal Features.
-
-- To be added.
-
 ## V. Technical Development Strategy.
 
 Hierarchy of the application loop:
@@ -117,7 +113,7 @@ Hierarchy of the application loop:
 		- End zone line position cannot be more than left edge or less than start line.
 		- Media boxes position cannot be less than right edge.(x y edge constraints on the pane)
 		- Images are not mutable.(mute attribute not inherited)
-		- Audio is not hidable.(hide attribute not inherited)
+		- Audio is not hide-able.(hide attribute not inherited)
 		- Cannot have more than 8 media at the same time.(inherent limitation of JavaFX?)
 
 2. Import Stage.
@@ -155,7 +151,16 @@ Note: This is based on how it functions currently and is not extensive.
 
 ## VII . Testing Plan
 
+- Testing is done with FX-Testing and JUnit for the unit tests.
+- Care needs to be taken while doing the integration tests and the final product to make sure all of the features work concurrently without issues.
+- All of the testing information is included in the testing document.
+
 ## VIII . Deployment Plan
+
+The finished software is expected to be deployed in windows.
+Any interactions with the application and windows will be managed by the framework.
+Meaning in terms of retaining windows compatibility for maintenance would all depend on the framework.
+Sticking to the same framework will inevitably result in compatibility issues in the future which would then mean a complete overhaul of the software, but this is currently not a cause for concern.
 
 ## IX . Maintenance Plan
 This section covers our future plan for the software.
