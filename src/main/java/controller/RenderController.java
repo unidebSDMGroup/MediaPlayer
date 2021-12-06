@@ -4,11 +4,11 @@ import java.util.ResourceBundle;
 
 import javax.print.DocFlavor.URL;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import main.App;
@@ -16,32 +16,33 @@ import model.*;
 import util.Validator;
 
 public class RenderController {
-
+	
 	@FXML
-	public Button maximize_button;
-
+	public void close() {
+		App.previewStage.show();
+		App.timelineStage.show();
+        App.renderStage.hide();
+        
+	}
+	
 	@FXML
-	public Button minimize_button;
-
-
-	@FXML
-	public Button close_button;
-
+	public void min() {
+		App.renderStage.setIconified(true);
+	}
+	
+	
 	@FXML
 	public Pane render_pane; 
 	
 	public static Pane static_pane;
-	double x,y;
 	
-
+	
 	 @FXML
 	    public void initialize() {
 		    //uwu
 	        static_pane = render_pane;
-		    static_pane.setMaxWidth(Double.MAX_VALUE);
-		    static_pane.setMaxHeight(Double.MAX_VALUE);
 	    }
-
+	
 	 
 	
 	public static void init_render() {
@@ -70,6 +71,7 @@ public class RenderController {
 			}
 		}
 	}
+	 
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -119,49 +121,5 @@ public class RenderController {
 		static_pane.getChildren().add(at.audio);
 
 	}
-	@FXML
-	private void min(MouseEvent event) {
-		App.renderStage.setIconified(true);
-
-	}
-	/*@Override
-	public void initialize(java.net.URL url, ResourceBundle rb) {
-		static_pane = render_pane;
-		static_pane.setMaxWidth(Double.MAX_VALUE);
-		static_pane.setMaxHeight(Double.MAX_VALUE);
-
-
-
-		//  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}*/
-
-	@FXML
-	private void max(MouseEvent event) {
-		if(App.renderStage.isMaximized()){
-			App.renderStage.setMaximized(false);
-			App.renderStage.setFullScreen(false);
-		}
-		else{
-			App.renderStage.setFullScreen(true);
-			App.renderStage.setMaximized(true);
-		}
-	}
-
-	@FXML
-	private void close(MouseEvent event) {
-		App.renderStage.close();
-		App.previewStage.show();
-		App.timelineStage.show();
-	}
-	@FXML
-	void pressed(MouseEvent event){
-		x = event.getSceneX();
-		y = event.getSceneY();
-	}
-	@FXML
-	void dragged(MouseEvent event){
-		App.renderStage.setY(event.getScreenY() - y);
-		App.renderStage.setX(event.getScreenX() - x);
-
-	}
+	
 }

@@ -5,84 +5,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TimelineController">
-   <center>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0" prefWidth="807.0" style="-fx-background-color: #121212;">
-         <children>
-            <Button fx:id="import_button" layoutX="14.0" layoutY="272.0" mnemonicParsing="false" onAction="#import_file" onMousePressed="#import_select" onMouseReleased="#import_unselect" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Import" translateY="10.0" />
-            <Button fx:id="export_button" layoutX="690.0" layoutY="272.0" mnemonicParsing="false" onAction="#export" prefHeight="39.0" prefWidth="103.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Export" translateY="10.0" />
-            <ScrollPane fx:id="scroll_pane" layoutX="208.0" layoutY="21.0" prefHeight="240.0" prefWidth="569.0" style="-fx-background: #282828;">
-               <content>
-                  <AnchorPane fx:id="stack_pane" prefHeight="237.0" prefWidth="566.0">
-                     <children>
-                        <VBox fx:id="vbox" prefHeight="234.0" prefWidth="561.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
-            <ScrollPane fx:id="layer_scroll_pane" layoutX="14.0" layoutY="21.0" prefHeight="240.0" prefWidth="184.0" style="-fx-background: #282828;">
-               <content>
-                  <VBox fx:id="layer_vbox" prefHeight="236.0" prefWidth="181.0" />
-               </content>
-            </ScrollPane>
-            <Label fx:id="end_label" layoutX="479.0" layoutY="302.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="end" />
-            <Label fx:id="start_label" layoutX="479.0" layoutY="282.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="start" />
-            <Label fx:id="media_start_label" layoutX="167.0" layoutY="302.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="playing at" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Pane>
-   </center>
-   <top>
-      <HBox alignment="CENTER_RIGHT" onMouseDragged="#dragged" onMousePressed="#pressed" style="-fx-background-color: darkgray;" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="minimize_button" minHeight="9.0" minWidth="23.0" mnemonicParsing="false" onMouseClicked="#min" prefHeight="9.0" prefWidth="23.0" styleClass="minimize_button" stylesheets="@myCss.css">
-               <padding>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </padding>
-               <font>
-                  <Font name="Avenir Next Bold" size="10.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="maximize_button" minHeight="9.0" minWidth="23.0" mnemonicParsing="false" onMouseClicked="#max" prefHeight="9.0" prefWidth="23.0" styleClass="maximize_button" stylesheets="@myCss.css" textFill="WHITE">
-               <padding>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </padding>
-               <font>
-                  <Font name="Avenir Next Bold" size="10.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button id="close_button" fx:id="close_button" minHeight="9.0" minWidth="23.0" mnemonicParsing="false" onMouseClicked="#close" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="9.0" prefWidth="23.0" styleClass="close_button" stylesheets="@myCss.css" translateY="-1.0">
-               <padding>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </padding>
-               <font>
-                  <Font name="Avenir Next Bold" size="10.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </HBox>
-   </top>
-</BorderPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="799.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TimelineController">
+   <children>
+      <Button fx:id="import_button" layoutX="14.0" layoutY="298.0" mnemonicParsing="false" onAction="#import_file" onMousePressed="#import_select" onMouseReleased="#import_unselect" prefHeight="39.0" prefWidth="91.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Import" translateY="10.0" />
+      <Button fx:id="export_button" layoutX="690.0" layoutY="298.0" mnemonicParsing="false" onAction="#export" prefHeight="39.0" prefWidth="103.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="Export" translateY="10.0" />
+      <ScrollPane fx:id="scroll_pane" layoutX="208.0" layoutY="47.0" prefHeight="240.0" prefWidth="569.0" style="-fx-background: #282828;">
+         <content>
+            <AnchorPane fx:id="stack_pane" prefHeight="237.0" prefWidth="566.0">
+               <children>
+                  <VBox fx:id="vbox" prefHeight="234.0" prefWidth="561.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <ScrollPane fx:id="layer_scroll_pane" layoutX="14.0" layoutY="47.0" prefHeight="240.0" prefWidth="184.0" style="-fx-background: #282828;">
+         <content>
+            <VBox fx:id="layer_vbox" prefHeight="236.0" prefWidth="181.0" />
+         </content>
+      </ScrollPane>
+      <Label fx:id="end_label" layoutX="479.0" layoutY="328.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="end" />
+      <Label fx:id="start_label" layoutX="479.0" layoutY="308.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="start" />
+      <Label fx:id="media_start_label" layoutX="167.0" layoutY="328.0" prefHeight="17.0" prefWidth="184.0" style="-fx-text-fill: #7d7d7d;" text="playing at" />
+      <Button layoutX="756.0" layoutY="13.0" mnemonicParsing="false" onAction="#close" prefHeight="26.0" prefWidth="37.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="X" />
+      <Button layoutX="713.0" layoutY="13.0" mnemonicParsing="false" onAction="#min" prefHeight="26.0" prefWidth="37.0" style="-fx-background-color: #121212; -fx-text-fill: #cfcfcf;" text="-" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</Pane>
