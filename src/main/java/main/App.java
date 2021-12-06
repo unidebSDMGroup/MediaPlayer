@@ -68,7 +68,9 @@ public class App extends Application{
 
 			  
 			  Parent previewRoot = FXMLLoader.load(getClass().getClassLoader().getResource("Preview_Screen.fxml"));
-			  Scene previewScene = new Scene(previewRoot);
+			  Color col = new Color((float)35/255, (float)35/255, (float)64/255, 1);
+			  Scene previewScene = new Scene(previewRoot,col);
+			  
 
 			  
 			  ParallelCamera c = new ParallelCamera();
@@ -125,7 +127,7 @@ public class App extends Application{
 			  
 			  
 			  previewScene.setCamera(c);
-			  
+			   
 			  previewStage.setScene(previewScene);
 			  previewStage.show();
 			  previewStage.setTitle("Preview");
