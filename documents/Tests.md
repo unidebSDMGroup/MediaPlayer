@@ -2,13 +2,17 @@
 
 | TESTER     | TASK | VERSION | DATE | RESULT | COMMENT |
 | ----------- | -----| ----------- | ----------- | ----------- | ----------- |
-| Khizr      | timeline zone selectors generation|  |   | pass |  |
-| Khizr      | timeline zone selectors overlapping |  |   | fail |  |
-| Khizr      | timeline zone selectors overlapping |  |   | pass | added methods to stop the lines from overlapping  |
-| Khizr      | mute button on generation |  |   | pass | works visually actual video muting not implemented |
-| Khizr      | mute button muting video |  |   | pass | added video mute functionality |
-| Khizr      | implementied image and audio rendering |   |   | pass | both images and videos can be displayed while the audio plays in the background |
-| Khizr      | validator for checking wether all videos intersect zone selectors |  |   | fail | method would not check all files only the first file |
-| Khizr      | validator for checking wether all videos intersect zone selectors |  |   | pass | now checks all files before displaying alert box |
-| Selin      | custom title bar and window control buttons |  |   | fail | dragging window by hbox causing visual glitches |
-| Selin      | custom title bar and window control buttons |  |   | pass | fixed issue with dragging and maximizing preview screen |
+| Amin    | Main features : Screens | 0.1  |  10 nov | pass | the screens show and behave as expected |
+| Amin    | Main features : Importing media | 0.1  |  16 nov | pass | base logic works, need to extend it with other formats |
+| Amin    | Main features : Exporting | 0.1  |  16 nov | pass | |
+| Amin      | Main features : basic video rendering | 0.1  |  18 nov | pass |  |
+| Amin      | Main features : zone selectors | 0.1  |  18 nov | fail | selectors were implemented but behaving weirdly |
+| Khizr     | Main features : mute function | 0.2  |  20 nov | pass | |
+| Khizr      | Main features : zone selectors | 0.2  | 20 nov  | pass |  |
+| Khizr      | Additional features : Image and audio rendering | 1.0  | 25 nov  | pass | both images and videos can be displayed while the audio plays in the background |
+| Khizr     | Additional features : Intersection validation | 1.0  |  25 nov | pass | |
+| Amin     | Regression test | 1.0  |  25 nov | pass | making sure new features did not cause issues |
+| Selin    | Additional features : custom window buttons | 1.0  |  26 nov | fail | making sure new features did not cause issues |
+| Amin    | Finalizing | 1.1  |  4 dec | pass | confirmation test |
+| Adi    | Finalizing : UI | 1.1  |  4 dec | pass | layer-scrollpane is not scrolling automatically |
+| Adi    | Finalizing : functionality | 1.1  |  4 dec | pass | the process works without errors or obvious issues |

@@ -43,10 +43,25 @@ import util.Vector2;
 import view.Global_elements;
 
 
-
+/**
+ * Contains most of the core logic for the software.
+ * Mainly responsible 
+ * 
+ * @author kefta
+ *
+ */
 public class Type_picker {
 //	public boolean zoneGenerated = false;
 	
+	/**
+	 * Attempts to select which media type to initialize as well as launch it's appropriate type initializer method
+	 * 
+	 * @param in file name
+	 * @param vbox_parent draggable box container
+	 * @param layer_vbox layer info container
+	 * @param stack_pane parent stack pane
+	 * @param media_start_label the label showing start-time of the selected media object
+	 */
 public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
 	
 		
@@ -61,18 +76,27 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 			
 	} 
 	
-
+	/**
+	 * fetches the filename's extension
+	 * 
+	 * @param filename provided filename
+	 * @return the extention as an optional string
+	 */
 	public Optional<String> getExtensionByStringHandling(String filename) {
 		
 	    return Optional.ofNullable(filename)
 	      .filter(f -> f.contains("."))
 	      .map(f -> f.substring(filename.lastIndexOf(".") + 1));
 	}
-	 
+	
+	
+	 /**
+	  * Responsible for general common media initializing
+	  * also assigns colors and names
+	  * 
+	  * @param media_instance
+	  */
 	public void init_media(MediaType media_instance) {
-		//TODO add video length variation
-		//TODO add preview stuff
-		//TODO convert pixels to time
 		
 		media_instance.name = "Media layer "+Media_container.media_collection.size();
 		
@@ -103,6 +127,15 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		Media_container.media_collection.add(media_instance);
 	}
 	
+	/**
+	 * Image initializer responsible for building image objects and storing them in the {@link model.Media_container}
+	 * 
+	 * @param in file name
+	 * @param parent_vbox draggable box container
+	 * @param layer_vbox layer info container
+	 * @param stack_pane parent stack pane
+	 * @param media_start_label the label showing start-time of the selected media object
+	 */
 	public void init_Image(File in, VBox parent_vbox,VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
 		
 		ImageType media_instance = new ImageType();
@@ -152,6 +185,13 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		}
 	}
 	
+	/**
+	 * Responsible for adding the resizing component for a given preview rectangle.
+	 * 
+	 * @param media_instance used media object
+	 * @param prev_rectangle given preview rectangle
+	 * @return
+	 */
 	private Rectangle add_resize_rect(VisualType media_instance , Rectangle prev_rectangle) {
 		 Rectangle drag_rect = new Rectangle();
 	        drag_rect.setWidth(20);
@@ -220,6 +260,15 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	}
 
 
+	/**
+	 * Video initializer responsible for building image objects and storing them in the {@link model.Media_container}
+	 * 
+	 * @param in file name
+	 * @param parent_vbox draggable box container
+	 * @param layer_vbox layer info container
+	 * @param stack_pane parent stack pane
+	 * @param media_start_label the label showing start-time of the selected media object
+	 */
 	public void init_Video(File in, VBox parent_vbox, VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
 
 		VideoType media_instance = new VideoType();
@@ -286,6 +335,15 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 		//zoneSelectors(stack_pane);
 	}
 	
+	/**
+	 * Builds a rectangle to be added to the timeline grid using data from media instance.
+	 * configure the rectangle for horizontal movement.
+	 * uses a label to display start-time info.
+	 * 
+	 * @param media_instance the given media instance
+	 * @param media_start_label used label
+	 * @return the created rectangle
+	 */
 	private Rectangle add_timeline_UI(MediaType media_instance,Label media_start_label) {
 		
         Rectangle rectangle = new Rectangle();
@@ -333,6 +391,14 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 
 		return rectangle;
 	}
+	
+	/**
+	 * Builds a rectangle to be added to the preview window using data from media instance.
+	 * configure the rectangle for movement
+	 * 
+	 * @param media_instance provided media instance
+	 * @return the created rectangle
+	 */
 	private Rectangle add_preview_UI(VisualType media_instance) {
 		
         Rectangle prev_rectangle = new Rectangle();
@@ -378,6 +444,13 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	      });
 		return prev_rectangle;
 	}
+	
+	/**
+	 * builds an HBox containing layer parameters ( name, mute icon, ... ) using data from a given media instance
+	 * 
+	 * @param media_instance The given media instance
+	 * @return The created Hbox
+	 */
 	 HBox add_layer_parameters(MediaType media_instance) {
         Label name = new Label(media_instance.name);
         
@@ -429,10 +502,16 @@ public void getFile(File in,VBox vbox_parent,VBox layer_vbox, AnchorPane stack_p
 	
 
 
-
+	 /**
+		 * Video initializer responsible for building image objects and storing them in the {@link model.Media_container}
+		 * 
+		 * @param in file name
+		 * @param parent_vbox draggable box container
+		 * @param layer_vbox layer info container
+		 * @param stack_pane parent stack pane
+		 * @param media_start_label the label showing start-time of the selected media object
+		 */
 	public void init_Audio(File in, VBox parent_vbox, VBox layer_vbox, AnchorPane stack_pane, Label media_start_label) {
-		 //TODO create audio
-		//zoneSelectors(stack_pane);
 
 		AudioType media_instance = new AudioType();
 

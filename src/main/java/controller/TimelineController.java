@@ -2,25 +2,17 @@ package controller;
 
 
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import main.App;
@@ -61,14 +53,24 @@ public class TimelineController {
 	@FXML
 	public VBox layer_vbox;
 	
+	/**
+	 * a static grid box scroll_pane object used for global access.
+	 */
 	public static ScrollPane static_scroll_pane;
+	/**
+	 * a static layer scroll_pane object used for global access.
+	 */
 	public static ScrollPane static_layer_scroll_pane;
 
-	
-	
+	/**
+	 * a static anchor_pane object used for global access.
+	 */
 	public static AnchorPane static_stack_pane;
 	
 	
+	/**
+	 * Initializes static fields from FXML components, disables scrolling for the layer scroll_pane and defines zone selectors
+	 */
 	 @FXML
 	    public void initialize() {
 
@@ -92,6 +94,9 @@ public class TimelineController {
 
 	    }
 	
+	 /**
+	  * Provides functionality for importing the files using a file chooser and {@link controller.Type_picker}
+	  */
 	@FXML
 	public void import_file() {
 		
@@ -101,6 +106,9 @@ public class TimelineController {
 
 	}
 	 
+	/**
+	 * Provides functionality for the export button in order to launch the render window.
+	 */
 	@FXML
 	public void export() {
 		
@@ -117,11 +125,17 @@ public class TimelineController {
 
 	}
 	
+	/**
+	 * closes the app.
+	 */
 	@FXML
 	public void close() {
 		Platform.exit();
 	}
 	
+	/**
+	 * minimizes the app
+	 */
 	@FXML
 	public void min() {
 		App.timelineStage.setIconified(true);
@@ -148,6 +162,16 @@ public class TimelineController {
 	 public void export_unselect() {
 		export_button.setText("Export");
 	 }
+	
+	/**
+	 * A line generator, creates and stores a line in the given anchorPane using predefined data.
+	 * start and end lines are differentiated with a boolean value.
+	 * @param pane anchorPane
+	 * @param height height of the line
+	 * @param offset i really don't know
+	 * @param edge_limit horizontal line scrolling limit
+	 * @param start_flag differentiator
+	 */
 	public void create_line(AnchorPane pane,int height,int offset,int edge_limit,boolean start_flag) {
 
 		Rectangle line = new Rectangle(0, 5, 5, height);
@@ -218,7 +242,10 @@ public class TimelineController {
 		end_label.setText(String_util.format_text("end mark",AppParameters.timeline_region_end_time /1000, "s"));
 
 	}
-	//zone selectors generation
+	/**
+	 * Creates the zone selector lines.
+	 * @param pane
+	 */
 	public void zoneSelectors(AnchorPane pane){
 
 		if(!zoneGenerated) {
