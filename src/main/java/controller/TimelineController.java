@@ -117,6 +117,16 @@ public class TimelineController {
 
 	}
 	
+	@FXML
+	public void close() {
+		Platform.exit();
+	}
+	
+	@FXML
+	public void min() {
+		App.timelineStage.setIconified(true);
+		App.previewStage.setIconified(true);
+	}
 	
 
 	@FXML

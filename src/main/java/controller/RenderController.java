@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javax.print.DocFlavor.URL;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -15,6 +16,19 @@ import model.*;
 import util.Validator;
 
 public class RenderController {
+	
+	@FXML
+	public void close() {
+		App.previewStage.show();
+		App.timelineStage.show();
+        App.renderStage.hide();
+        
+	}
+	
+	@FXML
+	public void min() {
+		App.renderStage.setIconified(true);
+	}
 	
 	
 	@FXML
@@ -57,6 +71,7 @@ public class RenderController {
 			}
 		}
 	}
+	 
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

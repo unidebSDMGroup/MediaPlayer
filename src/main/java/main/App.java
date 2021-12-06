@@ -45,9 +45,9 @@ public class App extends Application{
 		    new Global_elements();
 		    new Color_table();
 			 
-		    //timelineStage.initStyle(StageStyle.UNDECORATED);
-	        //previewStage.initStyle(StageStyle.UNDECORATED);
-	        //renderStage.initStyle(StageStyle.UNDECORATED);
+		    timelineStage.initStyle(StageStyle.UNDECORATED);
+	        previewStage.initStyle(StageStyle.UNDECORATED);
+	        renderStage.initStyle(StageStyle.UNDECORATED);
 
 
 		  try {

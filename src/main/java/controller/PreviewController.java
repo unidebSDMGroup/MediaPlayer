@@ -1,8 +1,10 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import main.App;
 
 public class PreviewController {
 	
@@ -19,6 +21,7 @@ public class PreviewController {
 		    //uwu
 	        static_prev_pane = prev_pane;
 	    }
+	 
 	
 	
 }
