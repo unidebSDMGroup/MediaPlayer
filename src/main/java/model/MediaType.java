@@ -1,7 +1,9 @@
 package model;
 
 import javafx.scene.paint.Color;
-
+/**
+ * Attributes for media objects used in the time-line
+ */
 public abstract class MediaType {
 	
 	

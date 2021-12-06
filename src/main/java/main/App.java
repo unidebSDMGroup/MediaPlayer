@@ -29,7 +29,11 @@ import model.AppParameters;
 import model.Color_table;
 import util.Vector2;
 import view.Global_elements;
-
+/**
+ * Application class with new instances for preview,render and time-line stages/panes
+ * 
+ *
+ */
 public class App extends Application{
 	 	
 	 	public static Stage previewStage = new Stage();
@@ -37,7 +41,9 @@ public class App extends Application{
 	    public static Stage timelineStage;
 		static DoubleProperty vPosition = new SimpleDoubleProperty();
 
-	
+	/**
+	 * Set time-line stage as primary stage at start
+	 */
 	public void start(Stage primaryStage) {
 		  
 		    timelineStage = primaryStage;
@@ -92,7 +98,7 @@ public class App extends Application{
 		          } 
 		        }
 		      });
-			   
+			  
 			  previewScene.setOnKeyPressed(new EventHandler<KeyEvent>()
 		      {
 
@@ -140,8 +146,6 @@ public class App extends Application{
 			  exc.printStackTrace();
 
 		  }
-		  
-		  //TODO add lines dynamically
 			for (int i = 0 ; i < 4000; i=i+20) {
 				create_line(i);
 			}
@@ -151,6 +155,9 @@ public class App extends Application{
 	        
 	    }
 	
+	/**
+	 * Binds scrolling for Media Labels and time-line rectangles
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void bind_scrollbars() {
 		vPosition.bind(TimelineController.static_scroll_pane.vvalueProperty());
@@ -163,7 +170,10 @@ public class App extends Application{
 	        }
 	    });
 	}
-	  
+	  /**
+	   * Sets grid lines for preview pane
+	   * @param position x positions for grid lines
+	   */
 	  public void create_line(int position) {
 			 Line line = new Line(0, 0, 0, 250);
 			 line.setStroke(Color.GREY);

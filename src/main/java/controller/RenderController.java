@@ -14,9 +14,16 @@ import javafx.util.Duration;
 import main.App;
 import model.*;
 import util.Validator;
-
+/**
+ * 
+ *Render Controller class
+ *
+ */
 public class RenderController {
 	
+	/**
+	 * FXML Close button hides render stage and re-open preview and time-line stages 
+	 */
 	@FXML
 	public void close() {
 		App.previewStage.show();
@@ -38,18 +45,23 @@ public class RenderController {
 	
 	
 	 @FXML
-	    public void initialize() {
-		    //uwu
+	 public void initialize() {
+		 
 	        static_pane = render_pane;
+	        
 	    }
 	
 	 
-	
+	/**
+	 * Hides preview and time-line panes when exported into render window and shows the render window
+	 * Also initializes media objects for the render window
+	 */
 	public static void init_render() {
 		
 		App.previewStage.hide();
 		App.timelineStage.hide();
         App.renderStage.show();
+        
         
 		for(MediaType mt :Media_container.media_collection) {
 			//an image
@@ -73,7 +85,10 @@ public class RenderController {
 	}
 	 
 	
-	
+	/**
+	 * Sets video parameters
+	 * @param vt video object
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void render_video(VideoType vt) {
 		
@@ -96,6 +111,11 @@ public class RenderController {
 
 		
 	}
+	
+	/**
+	 * Sets image parameters
+	 * @param it image object
+	 */
 	public static void render_image(ImageType it){
 
 		 it.image_view.setX(it.preview_position.x);
@@ -106,7 +126,11 @@ public class RenderController {
 		static_pane.getChildren().add(it.image_view);
 
 	}
-
+	
+	/**
+	 * Sets audio parameters
+	 * @param at audio object
+	 */
 	public static void render_audio(AudioType at){
 
 		at.audio.getMediaPlayer().play();

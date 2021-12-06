@@ -6,6 +6,10 @@ import java.util.Map;
 
 import javafx.scene.paint.Color;
 
+/**
+ * Color attributes for the preview pane time-line bar media imports
+ *
+ */
 public class Color_table {
 
 	//public static ArrayList<Color> colors;

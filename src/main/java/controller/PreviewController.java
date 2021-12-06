@@ -8,13 +8,17 @@ import main.App;
 
 public class PreviewController {
 	
-	
+	/**
+	 * Preview pane object declaration
+	 */
 	@FXML
 	public Pane prev_pane;
 	
 	public static Pane static_prev_pane;
 	
-	
+	/**
+	 * uwu Initialize preview pane
+	 */
 	 @FXML
 	    public void initialize() {
 
